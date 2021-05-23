@@ -1,0 +1,43 @@
+{
+  "pages": [
+    "pages/intital/initial",
+    "pages/register/register",
+    "pages/login/login",
+    "pages/resetPassword/resetPassword",
+
+    "pages/personal/personal",
+    "pages/index/index",
+    "pages/addLog/addLog",
+    
+    
+  
+    "pages/logDetail/logDetail",
+    "pages/editData/editData",
+    "pages/setting/setting"
+  ],
+  "window": {
+    "backgroundColor": "#F6F6F6",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F6F6F6",
+    "navigationBarTitleText": "云开发 QuickStart",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "主页",
+        "iconPath": "./static/image/Home.png",
+        "selectedIconPath": "./static/image/selectHome.png"
+      },
+      {
+        "pagePath": "pages/personal/personal",
+        "text": "个人",
+        "iconPath": "./static/image/Person.png",
+        "selectedIconPath": "./static/image/selectedPerson.png"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+<!--miniprogram/pages/login/login.wxml-->
+<view class="container">
+  <view class="title">
+    <text class="bigTitle">登录</text>
+    <text class="smallTitle">在这里，发现更大世界  (･ω･)</text>
+    <input class="phoneNumber" type="text" placeholder="手机号"></input>
+    <input class="passWard" type="password" placeholder="密码"></input>
+    <button class="loginButton">登录</button>
+    <view class="forgetPassward">
+      <text bindtap="registerAccount">注册账号</text>
+      <text bindtap="forgetPassward">忘记密码</text>
+    </view>
+  </view>
+</view>

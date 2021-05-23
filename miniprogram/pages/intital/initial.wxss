@@ -1,0 +1,95 @@
+/* pages/intital/initial.wxss */
+.container{
+  position: relative; 
+  width: 100vh;
+  height: 100vh;
+}
+
+/* 背景图片样式 */
+.container .backImage{
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* 标题样式 */
+.container .proImageArea{
+  /* background-color: red; */
+  height: 150rpx;
+  z-index: 2;
+  position: absolute;
+  left: 190rpx;
+  top: 300rpx;
+  color:rgba(224,224,244,1);
+}
+
+.container .proImageArea .proImage{
+  width: 126rpx;
+  height: 120rpx;
+}
+
+.container .proNameArea{
+  position: absolute;
+  z-index: 2;
+  /* background-color: blue; */
+  left: 320rpx;
+  top: 280rpx;
+}
+
+
+.container .proNameArea .proName{
+  margin-left: 20rpx;
+  font-size: 72rpx;
+  line-height: 150rpx;
+  font-family: "方正兰亭黑-标准";
+  color:rgba(224,224,244,1);
+}
+
+
+/* 按钮公共样式 */
+.container .Button{
+  z-index: 3;
+  position: absolute;
+  width: 240rpx;
+  height: 100rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 50rpx;
+  opacity: 0.65;
+  font-size: 36rpx;
+  font-family: PingFangSC-regular;
+}
+
+/* 注册按钮样式 */
+.container .buttonRegister{
+  left: 80rpx;
+  top: 79%;
+  background-color: rgba(255, 255, 255, 100);
+  border: 4rpx solid rgba(87, 178, 251, 100);
+}
+
+/* 登录按钮样式 */
+.container .buttonLogin{
+  left: 420rpx;
+  top: 79%;
+  background-color: rgba(87, 178, 251, 100);
+  border: 4rpx solid rgba(255, 255, 255, 100);
+}
+
+/* 白条样式 */
+/* .container .whiterectangle{
+  width: 220rpx;
+  height: 10rpx;
+  background-color: white;
+  position: absolute;
+  left: 265rpx;
+  
+ bottom: 16rpx;
+  z-index: 4;
+} */
+
+/* iconfont样式 */
+/* .container .proNameArea .iconfont{
+  font-size: 100rpx;
+  margin-right: 20rpx;
+} */

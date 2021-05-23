@@ -1,0 +1,23 @@
+<!--pages/intital/initial.wxml-->
+<view class="container"> 
+  <!-- 背景图片 -->
+<image class="backImage" src="../../static/image/initialbackImage.png"></image>
+<!-- 图标和标题 -->
+<view class="proImageArea">
+  <!-- <text class="iconfont icon-xiaoxiicon"></text> -->
+  <image class="proImage" src="../../static/image/initialicon.png"></image>
+</view>
+<view class="proNameArea">
+  <text class="proName">小日志</text>
+</view>
+
+
+<!-- 注册和登录按钮 -->
+<button class="Button buttonRegister" bindtap="register">注册</button>
+<button class="Button buttonLogin" bindtap="login">登录</button>
+<!-- 白色矩形样式 -->
+<!-- <view class="whiterectangle">
+
+</view> -->
+</view>
+

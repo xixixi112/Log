@@ -1,0 +1,59 @@
+/* pages/register/register.wxss */
+/* miniprogram/pages/login/login.wxss */
+.container{
+  width: 100vh;
+  height: 100vh;
+  /* background-color: red; */
+  position: relative;
+  background-color: rgba(255, 255, 255, 100);
+}
+
+.container .title{
+  position: absolute;
+  left: 66rpx;
+  top: 360rpx;
+}
+
+/* 标题样式 */
+.container .title text{
+  display: block;
+}
+
+/* 大标题样式 */
+.container .title .bigTitle{
+color: rgba(16, 16, 16, 100);
+font-size: 28px;
+text-align: left;
+font-family: PingFangSC-bold;
+margin-bottom: 4rpx;
+}
+
+/* 小标题样式 */
+.container .title .smallTitle{
+  color: rgba(198, 198, 198, 100);
+  font-size: 13px;
+  text-align: left;
+  font-family: PingFangSC-regular;
+  margin-bottom: 60rpx;
+}
+
+/* 输入框样式 */
+.container .title input{
+  width: 626rpx;
+  height: 68rpx;
+  margin-bottom: 34rpx;
+  border-bottom: 1px solid rgba(187, 187, 187, 1)
+}
+
+/*注册按钮样式 */
+.container .title .registerButton{
+  background-color: rgb(87, 178, 251,1);
+  width: 616rpx;
+  height: 80rpx;
+  margin-top: 66rpx;
+  color: rgb(255, 255, 255,1);
+  font-family: PingFangSC-regular;
+  letter-spacing: 12rpx;
+  text-align: center;
+}
+

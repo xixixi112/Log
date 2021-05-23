@@ -1,0 +1,11 @@
+<!--miniprogram/pages/logDetail/logDetail.wxml-->
+<import src="../../wxParse/wxParse.wxml"></import>
+<view>
+<!-- 标题 -->
+<view class="LogTitle">{{LogTitle}}</view>
+
+<!-- 文本区域 -->
+<view>
+<template is="wxParse" data="{{wxParseData:article.nodes}}"/>
+</view>
+</view>

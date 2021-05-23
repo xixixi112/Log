@@ -1,0 +1,17 @@
+<!--pages/setting/setting.wxml-->
+    <wux-cell-group>
+      <wux-cell title="账号与安全" is-link></wux-cell>
+      <wux-cell title="隐私设置" is-link></wux-cell>
+      <wux-cell title="通知设置" is-link></wux-cell>
+      <wux-cell title="通用设置" is-link></wux-cell>
+      <wux-cell title="功能申请" is-link></wux-cell>
+      <wux-cell title="青少年模式" is-link extra="未开启"></wux-cell>
+      <wux-cell title="深色模式">
+        <wux-switch name="stable" slot="footer" color="blue" value="{{ value }}" bind:change="onChange" />
+      </wux-cell>
+      <wux-cell title="帮助与客服" is-link></wux-cell>
+      <wux-cell title="鼓励一下" is-link></wux-cell>
+      <wux-cell title="关于小日志" is-link></wux-cell>
+      <wux-cell title="退出当前账号" is-link></wux-cell>
+    </wux-cell-group>
+

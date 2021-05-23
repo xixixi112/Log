@@ -1,0 +1,41 @@
+<!--pages/index/index.wxml-->
+<!-- 可拖动按钮 -->
+  <view class="btn_Suspension" bindtap="btn_Suspension_click" catchtouchmove="buttonMove" bindtouchstart="buttonStart"
+    bindtouchend="buttonEnd" style="top:{{buttonTop}}px;left:{{buttonLeft}}px;">
+    <text class="iconfont icon-jiahao"></text>
+  </view>
+
+
+<!-- 日志列表 -->
+  <view class="logshowArea">
+  <view class="logDetail" bindtap="getLogDetail">
+    <view class="logTime">
+      <text class="iconfont icon-time"></text>
+      {{LogTime}}
+    </view>
+    <view class="logTitle">{{LogTitle}}</view>
+    <view class="logImg">
+      <image src="{{LogImg}}"></image>
+    </view>
+    <view class="logLocation">
+      <text class="iconfont icon-weizhibiaoji"></text>
+      {{LogLocation}}
+    </view>
+  </view>
+  <view class="logDetail">
+    <view class="logTime">
+      <text class="iconfont icon-time"></text>
+      2021.5.21
+    </view>
+    <view class="logTitle">标题</view>
+    <view class="logImg">
+      <image src="../../static/image/03.jpg"></image>
+    </view>
+    <view class="logLocation">
+      <text class="iconfont icon-weizhibiaoji"></text>
+      北京
+    </view>
+  </view>
+</view>
+
+

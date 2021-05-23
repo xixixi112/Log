@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="title">
+    <text class="bigTitle">编辑</text>
+    <text decode="true" class="smallTitle">一起来展现自我吧~</text>
+    <input class="personName" type="text" placeholder="用户名"></input>
+    <input class="signature" type="text" placeholder="个性签名"></input>
+    <button class="editDataButton">编辑</button>
+  </view>
+</view>
