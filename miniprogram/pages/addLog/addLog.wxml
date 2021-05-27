@@ -1,4 +1,3 @@
-
 <!-- 顶部功能按钮 -->
 <!-- <view class="toolbar" catchtouchend="format"> -->
   <!-- <view class="toolbar" catchtouchend="format" hidden="{{keyboardHeight > 0 ? true : false}}" style="bottom: {{isIOS ? keyboardHeight : 0}}px"></view> -->
@@ -76,8 +75,9 @@
     bind:getEditorContent='getEditorContent'></richText>
   </view>
   </scroll-view>
-  <view class="button">
+<view class="button">
   <view class="preview" bindtap="preview">预览</view>
   <view class="submit" bindtap="submit">提交</view>
 </view>
+
  

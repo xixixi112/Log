@@ -1,5 +1,4 @@
 {
-  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -19,32 +18,10 @@
           "query": ""
         },
         {
-          "name": "pages/index/index",
-          "pathName": "pages/index/index",
-          "query": "",
-          "scene": null
-        },
-        {
           "name": "pages/personal/personal",
           "pathName": "pages/personal/personal",
           "query": "",
           "scene": null
-        },
-        {
-          "name": "pages/addLog/addLog",
-          "pathName": "pages/addLog/addLog",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "pages/preview/preview",
-          "pathName": "pages/preview/preview",
-          "query": "",
-          "scene": null,
-          "partialCompile": {
-            "enabled": true,
-            "pages": []
-          }
         }
       ]
     }

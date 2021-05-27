@@ -2,7 +2,6 @@
 var util = require('../../utils/util.js')
 var startPoint
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -170,3 +169,4 @@ Page({
 
   }
 })
+

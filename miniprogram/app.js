@@ -17,6 +17,50 @@ App({
       })
     }
 
-    this.globalData = {}
-  }
+		// wx.setNavigationBarTitle({
+		// 	title: '个人'
+		// })
+		// //当重新加载这个页面时，查看是否有已经登录的信息
+		// let username = wx.getStorageSync('username'),
+		// 	avatar = wx.getStorageSync('avatar'),
+		// 	signature = wx.getStorageSync('signature'),
+		// 	userInfo = wx.getStorageSync("userInfo");
+		// console.log("头像: " + userInfo.avatar)
+		// if (username) {
+		// 	this.setData({
+		// 		username: username,
+		// 		avatar: userInfo.avatar,
+		// 		signature: userInfo.signature,
+		// 		gender: userInfo.gender
+		// 	})
+		// }
+		// wx.getSetting({
+		// 	success: res => {
+		// 		if (res.authSetting['scope.userInfo']) {
+		// 			wx.getUserInfo({
+		// 				success: res => {
+		// 					console.log("setting返回: " + JSON.stringify(res))
+		// 					// this.setData({
+		// 					// 	avatar: res.userInfo.avatarUrl,
+		// 					// 	userInfo: res.userInfo
+		// 					// })
+		// 				}
+		// 			})
+		// 		}
+		// 	}
+		// })
+		
+		this.globalData = {
+			userInfo: {
+				userId: '',
+				username: '',
+				openid: '',
+				gender: 1,
+				avatar: '',
+				signature: ''
+			},
+			logs: []
+		}
+
+	}
 })

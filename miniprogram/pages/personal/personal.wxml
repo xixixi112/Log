@@ -6,17 +6,16 @@
     <view class="personInfoArea">
       <!-- 头像 -->
       <view class="headPortrait">
-        <image src="../../static/image/headPartrait.jpg"></image>
+        <image src="{{avatar}}"></image>
       </view>
       <!-- 昵称 -->
       <view class="name">
-        Elina
-        
+        {{username}}
       </view>
      
       <!-- 日志ID -->
       <view class="LogID">
-        小日志ID：203882651
+        {{userId}}
       </view>
       
       <!-- 其他
@@ -27,32 +26,33 @@
       </view> -->
       <!-- 个性签名 -->
       <view class="signature">
-        云深时见鹿，海蓝时见鲸，梦醒时见你
+        {{signature}}
       </view>
-
+      
     </view>
-    <!-- 粉丝数，日志数 -->
-    <view class="mutualInformation">
-      <view class="attention">
-        <text class="number">667</text>
-        <text class="text">关注</text>
-      </view>
-      <view class="fans">
-        <text class="number">999</text>
-        <text class="text">粉丝</text>
-      </view> 
-      <view class="log">
-        <text class="number">224</text>
-        <text class="text">日志</text>
-      </view>
+    	<!-- 粉丝数，日志数 -->
+		<view class="mutualInformation">
+			<view class="attention">
+				<text class="number">667</text>
+				<text class="text">关注</text>
+			</view>
+			<view class="fans">
+				<text class="number">999</text>
+				<text class="text">粉丝</text>
+			</view>
+			<view class="log">
+				<text class="number">224</text>
+				<text class="text">日志</text>
+			</view>
 
-      <view class="editData" bindtap="settingData">
-        编辑资料
-      </view>
-      <view class="setting" bindtap="setting">
-        <text class="iconfont icon-shezhi"></text>
-      </view>
-    </view>
+			<view class="editData" bindtap="settingData">
+				编辑资料
+			</view>
+			<view class="setting" bindtap="setting">
+				<text class="iconfont icon-shezhi"></text>
+			</view>
+		</view>
+
   </view>
    
   <!-- 底部区域 -->
@@ -93,3 +93,5 @@
     </swiper>
   </view>
 </view>
+
+			
