@@ -120,38 +120,10 @@ Page({
 				wx.cloud.uploadFile({
 					cloudPath, //云存储图片名字
 					filePath, //临时路径
-					success: res => {
-						console.log('[上传图片] 成功：', res)
-						that.data.ImgUrl = res.fileID
-						console.log('image0：', that.data.ImgUrl)
-						console.log('image0000：', res.fileID)
-						
+					success: res => {						
 						that.setData({
 							ImgUrl: res.fileID, //云存储图片路径,可以把这个路径存到集合，要用的时候再取出来
 						});
-						console.log("image: " + that.data.ImgUrl)
-						// let fileID = res.fileID;
-						// //把图片存到users集合表
-						// const db = wx.cloud.database();
-						// db.collection("logs").add({
-						// 	data: {
-						// 		ImgUrl: fileID
-						// 	},
-						// 	success: function() {
-						// 		wx.showToast({
-						// 			title: '图片存储成功',
-						// 			'icon': 'none',
-						// 			duration: 3000
-						// 		})
-						// 	},
-						// 	fail: function() {
-						// 		wx.showToast({
-						// 			title: '图片存储失败',
-						// 			'icon': 'none',
-						// 			duration: 3000
-						// 		})
-						// 	}
-						// });
 					},
 					fail: e => {
 						console.error('[上传图片] 失败：', e)
@@ -203,7 +175,7 @@ Page({
 			value
 		} = e.target.dataset
 		if (!name) return
-		// console.log('format', name, value)
+		console.log('format', name, value)
 		this.editorCtx.format(name, value)
 	},
 	onStatusChange(e) {
@@ -254,10 +226,9 @@ Page({
 		var that = this;
 		this.editorCtx.getContents({
 			success: function(res) {
-				console.log(that.data.dailyTitle + that.data.displayValue + that.data.curLocation + that.data.ImgUrl);
+				console.log(res)
 				if (that.data.dailyTitle === "" || that.data.displayValue === "点击选择日期" || that.data
 					.curLocation === "" || that.data.ImgUrl === "") {
-					
 					wx.showToast({
 						title: '请填写必要信息',
 						icon: 'error',
@@ -269,7 +240,7 @@ Page({
 					console.log('userId: ' + getApp().globalData.userInfo.userId)
 					let obj = {
 						image: that.data.ImgUrl,
-						detail: that.data.formats,
+						detail: res.delta,
 						title: that.data.dailyTitle,
 						time: that.data.displayValue,
 						location: that.data.curLocation,
