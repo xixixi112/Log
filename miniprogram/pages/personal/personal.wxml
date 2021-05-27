@@ -10,29 +10,28 @@
       </view>
       <!-- 昵称 -->
       <view class="name">
-        一分之二
+        Elina
+        
       </view>
+     
       <!-- 日志ID -->
       <view class="LogID">
-        小日志ID：12345
+        小日志ID：203882651
       </view>
-      <!-- 性别 -->
-      <view class="gender">
-        <text class="iconfont icon-icon8"></text>
-      </view>
-      <!-- 其他 -->
+      
+      <!-- 其他
       <view class="other">
         <text class="iconfont icon-trophy"></text>
         哈哈哈
         <text class="iconfont icon-guanbi1"></text>
-      </view>
+      </view> -->
       <!-- 个性签名 -->
       <view class="signature">
-        走过路过，点个关注不迷路。哈哈哈哈哈哈哈哈哈哈或或或或或或或或或或或或或或或
+        走过路过，点个关注不迷路。
       </view>
 
     </view>
-    <!-- 粉丝数，获赞数 -->
+    <!-- 粉丝数，日志数 -->
     <view class="mutualInformation">
       <view class="attention">
         <text class="number">667</text>
@@ -42,9 +41,9 @@
         <text class="number">999</text>
         <text class="text">粉丝</text>
       </view> 
-      <view class="collect">
-        <text class="number">56.4W</text>
-        <text class="text">收藏和获赞</text>
+      <view class="log">
+        <text class="number">224</text>
+        <text class="text">日志</text>
       </view>
 
       <view class="editData" bindtap="settingData">
@@ -54,13 +53,15 @@
         <text class="iconfont icon-shezhi"></text>
       </view>
     </view>
-
-
   </view>
    
   <!-- 底部区域 -->
   <view class="bottom">
-     <text>日志列表</text>
+    <view class="logsInfoArea">
+      <text class="logs">日志</text>
+      <text class="collections">收藏</text>
+      <text class="likes">赞过</text>
+    </view>
   </view>
   <view>
     

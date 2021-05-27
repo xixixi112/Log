@@ -1,4 +1,5 @@
 // pages/index/index.js
+var util = require('../../utils/util.js')
 var startPoint
 Page({
 
@@ -16,30 +17,50 @@ Page({
     LogLocation:"",
     Logdetail:"",
     LogInfo:[],
-    curTime:""
+    curTime:"",
+    list:[],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.getStorage({
-      key: '2021/05/22 15:59:24',
-      success: (result) => {
-        console.log(result)
-        this.setData({
-          LogTitle:result.data[0],
-          LogTime:result.data[1],
-          LogLocation:result.data[2],
-          LogImg:result.data[3],
-          Logdetail:result.data[4],
-          curTime:result.data[5]
-        })
+    wx.cloud.database().collection('logs').get()
+    .then(res=>{console.log(res)})
+    wx.cloud.callFunction({
+      name: 'getLog',
+    }).then(res=>{
+      console.log('请求云函数成功', res.result.data);
+      var data = res.result.data;
+      for(let i=0; i<data.length; i++) {
+        data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
+      }
+      this.setData({
+        list: data
+      })
+    })
+    .catch(err=>{
+      console.log('请求云函数失败', err);
+    })
+    
+    //console.log({list});
+    // wx.getStorage({
+    //   key: '2021/05/26 11:29:37',
+    //   success: (result) => {
+    //     console.log(result)
+    //     this.setData({
+    //       LogTitle:result.data[0],
+    //       LogTime:result.data[1],
+    //       LogLocation:result.data[2],
+    //       LogImg:result.data[3],
+    //       Logdetail:result.data[4],
+    //       curTime:result.data[5]
+    //     })
         
-      },
-      fail: (res) => {},
-      complete: (res) => {},
-    }),
+    //   },
+    //   fail: (res) => {},
+    //   complete: (res) => {},
+    // }),
   
     wx.getSystemInfo({
       success:(res)=> {

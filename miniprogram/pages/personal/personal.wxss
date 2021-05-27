@@ -1,19 +1,18 @@
 /* miniprogram/pages/personal/personal.wxss */
 .top{
   width: 100%;
-  height: 586rpx;
-  background-color: #293c3a;
+  height: 380rpx;
   position: relative;
 }
 .top .personInfoArea{
   position: relative;
 }
 .top .personInfoArea .headPortrait{
-  width: 200rpx;
-  height: 200rpx;
+  width: 160rpx;
+  height: 160rpx;
   position: absolute;
-  top: 114rpx;
-  left: 34rpx;
+  margin-top:7%;
+  margin-left: 5%;
 }
 
 .top .personInfoArea .headPortrait image{
@@ -23,54 +22,56 @@
 }
 
 .top .personInfoArea .name{
-  font-size: 56rpx;
+  font-size: 37rpx;
   position: absolute;
-  top: 104rpx;
-  left: 274rpx;
-  color: #fff;
+  margin-top:7%;
+  margin-left: 34%;
+  color: darkslategrey;
 }
 
 .top .personInfoArea .LogID{
   position: absolute;
-  font-size: 28rpx;
-  color: rgba(255, 255, 255, 0.78);
-  top: 200rpx;
-  left: 266rpx;
+  font-size: 22rpx;
+  color: darkslategrey;
+  margin-top:16%;
+  margin-left: 34%;
 }
 
 .top .personInfoArea .gender{
-  width: 82rpx;
-  height: 48rpx;
-  background-color: rgba(228, 222, 222, 100);
+  width: 62rpx;
+  height: 35rpx;
+  background-color: rgb(219, 219, 219);
   border-radius: 20rpx;
   position: absolute;
-  top: 264rpx;
-  left: 272rpx;
+  margin-top:0%;
+  margin-left: 100%;
   text-align: center;
-  line-height: 48rpx;
+  line-height: 34rpx;
 }
 
 .top .personInfoArea .gender text{
-  font-size: 48rpx;
+  font-size: 40rpx;
   color: #538CAB;
 }
 
-.top .personInfoArea .other{
+/* .top .personInfoArea .other{
   width: 200rpx;
   height: 48rpx;
   background-color: rgba(228, 222, 222, 100);
   border-radius: 20rpx;
   position: absolute;
-  top: 264rpx;
-  left: 372rpx;
+  margin-top:25%;
+  margin-left: 55%;
   text-align: center;
-  line-height: 48rpx;
+  font-size: 48rpx;
   color: #0E0E0E;
-}
+  font-size: 25rpx;
+} */
 
 .top .personInfoArea .other .icon-trophy{
   color:#f4c2c2;
-  font-size: 40rpx;
+  font-size: 39rpx;
+  
 }
 
 .top .personInfoArea .other .icon-guanbi1{
@@ -80,9 +81,10 @@
 
 .top .personInfoArea .signature{
   position: absolute;
-  top: 328rpx;
-  left: 44rpx;
-  color: #FFF;
+  font-size: 28rpx;
+  margin-top:23%;
+  margin-left: 34%;
+  color: darkslategrey;
   overflow:hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -92,88 +94,113 @@
 
 .top .mutualInformation .attention .number{
   position: absolute;
-  top: 460rpx;
-  left: 34rpx;
+  margin-top:35%;
+  margin-left: 5%;
   text-align: center;
-  color: #fff;
+  color: darkslategrey;
   font-size: 28rpx;
 }
 
 .top .mutualInformation .attention .text{
   position: absolute;
-  top: 504rpx;
-  left: 34rpx;
-  color: #fff;
+  margin-top:41%;
+  margin-left: 5%;
+  color: darkslategrey;
   font-size: 28rpx;
   text-align: center;
 }
 
 .top .mutualInformation .fans .number{
   position: absolute;
-  top: 460rpx;
-  left: 166rpx;
+  margin-top:35%;
+  margin-left: 20%;
   text-align: center;
-  color: #fff;
+  color: darkslategrey;
   font-size: 28rpx;
 }
 
 .top .mutualInformation .fans .text{
   position: absolute;
-  top: 504rpx;
-  left: 166rpx;
-  color: #fff;
+  margin-top:41%;
+  margin-left: 20%;
+  color: darkslategrey;
   font-size: 28rpx;
   text-align: center;
 }
 
-.top .mutualInformation .collect .number{
+.top .mutualInformation .log .number{
   position: absolute;
-  top: 460rpx;
-  left: 318rpx;
+  margin-top:35%;
+  margin-left: 35%;
   text-align: center;
-  color: #fff;
+  color: darkslategrey;
   font-size: 28rpx;
 }
 
-.top .mutualInformation .collect .text{
+.top .mutualInformation .log .text{
   position: absolute;
-  top: 504rpx;
-  left: 288rpx;
-  color: #fff;
+  margin-top:41%;
+  margin-left: 35%;
+  color: darkslategrey;
   font-size: 28rpx;
   text-align: center;
 }
 
 .top .mutualInformation .editData{
-  background-color: rgba(140, 165, 181, 100);
+  background-color: rgb(219, 219, 219);
   width: 138rpx;
   height: 48rpx;
   border-radius: 20rpx;
-  font-size: 28rpx;
+  font-size: 25rpx;
+  color:darkslategrey;
   position: absolute;
-  top: 480rpx;
-  left: 468rpx;
+  margin-top:38%;
+  margin-left: 80%;
   text-align: center;
   line-height: 48rpx;
 }
 
 .top .mutualInformation .setting{
-  width: 82rpx;
-  height: 48rpx;
+  width: 73rpx;
+  height: 45rpx;
   text-align: center;
-  line-height: 48rpx;
+  line-height: 36rpx;
   position: absolute;
-  top: 480rpx;
-  left: 640rpx;
-  background-color: #747D7A;
+  margin-top:2%;
+  margin-left: 90%;
+  background-color: rgb(219, 219, 219);
   border-radius: 20rpx;
 }
 
 .top .mutualInformation .setting .icon-shezhi{
-  color: #fff;
+  color:darkslategrey;
+  font-size:25rpx;
+  
 }
 
 
-.bottom text{
-  font-size: 40rpx;
+.bottom{
+  font-size: 35rpx;
+  width: 100%;
+  height: 800rpx;
+  position: relative;
+  background-color:white;
+  color:rgb(94, 94, 94);
+  border-radius: 50rpx;
+}
+
+.bottom .logsInfoArea{
+  position: relative;
+  margin-top: 3%;
+}
+.bottom .logsInfoArea .logs{
+  margin-left: 20%;
+}
+
+.bottom .logsInfoArea .collections{
+  margin-left: 15%;
+}
+
+.bottom .logsInfoArea .likes{
+  margin-left: 15%;
 }

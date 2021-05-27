@@ -28,7 +28,7 @@ page{
 .btn_Suspension .iconfont{
   text-align: center;
   line-height: 100rpx;
-  font-size: 50rpx;
+  font-size: 25rpx;
   color: rgba(87, 178, 251, 100);
   font-weight:bolder; 
  }
@@ -46,29 +46,31 @@ page{
 }
 
 .logshowArea .logDetail .iconfont{
-  font-size: 40rpx;
+  font-size: 25rpx;
+  color:slategray;
 }
 
 .logshowArea .logDetail .logTime{
-  font-size: 36rpx;
+  font-size: 25rpx;
   border-bottom:1rpx solid rgba(224, 224, 224, 0.9);
+  margin-left: 70%;
+  color:slategray;
   /* background-color: #fff; */
   /* color: #706d6d; */
 }
 
 .logshowArea .logDetail .logTitle{
-  font-size: 36rpx;
-  margin-bottom: 10rpx;
+  font-size: 38rpx;
+  margin-bottom: 3%;
+  padding-top: 3%;
+  text-align: center;
+  color:darkslategrey;
 }
 
-.logshowArea .logDetail .logImg{
-  text-align: center;
-  /* padding-left: 5%;
-  width: 90%; */
-  width: 100%;
-  height: 400rpx;
-  
-  margin-bottom: 10rpx;
+.logshowArea .logDetail .logSubHead{
+   text-align: center;
+   font-size: 35rpx;
+   color:darkslategrey;
 }
 
 .logshowArea .logDetail .logImg image{
@@ -77,5 +79,6 @@ page{
 }
 
 .logshowArea .logDetail .logLocation{
-  font-size: 36rpx;
+  font-size: 25rpx;
+  color:dimgray;
 }
