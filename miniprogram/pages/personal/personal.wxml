@@ -74,3 +74,72 @@
 
 	</view>
 </view>
+=======
+  <!-- 顶部区域 -->
+  <view class="top">
+    <!-- 个人信息 -->
+    <view class="personInfoArea">
+      <!-- 头像 -->
+      <view class="headPortrait">
+        <image src="../../static/image/headPartrait.jpg"></image>
+      </view>
+      <!-- 昵称 -->
+      <view class="name">
+        Elina
+        
+      </view>
+     
+      <!-- 日志ID -->
+      <view class="LogID">
+        小日志ID：203882651
+      </view>
+      
+      <!-- 其他
+      <view class="other">
+        <text class="iconfont icon-trophy"></text>
+        哈哈哈
+        <text class="iconfont icon-guanbi1"></text>
+      </view> -->
+      <!-- 个性签名 -->
+      <view class="signature">
+        走过路过，点个关注不迷路。
+      </view>
+
+    </view>
+    <!-- 粉丝数，日志数 -->
+    <view class="mutualInformation">
+      <view class="attention">
+        <text class="number">667</text>
+        <text class="text">关注</text>
+      </view>
+      <view class="fans">
+        <text class="number">999</text>
+        <text class="text">粉丝</text>
+      </view> 
+      <view class="log">
+        <text class="number">224</text>
+        <text class="text">日志</text>
+      </view>
+
+      <view class="editData" bindtap="settingData">
+        编辑资料
+      </view>
+      <view class="setting" bindtap="setting">
+        <text class="iconfont icon-shezhi"></text>
+      </view>
+    </view>
+  </view>
+   
+  <!-- 底部区域 -->
+  <view class="bottom">
+    <view class="logsInfoArea">
+      <text class="logs">日志</text>
+      <text class="collections">收藏</text>
+      <text class="likes">赞过</text>
+    </view>
+  </view>
+  <view>
+    
+  </view>
+</view>
+>>>>>>> 2f72cdc9dfa0b0f498a77fc02095f07e6c98caa7
