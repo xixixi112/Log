@@ -13,8 +13,7 @@
 
 
 <!-- 注册和登录按钮 -->
-<button class="Button buttonRegister" bindtap="register">注册</button>
-<button class="Button buttonLogin" open-type="getUserInfo" bindgetuserinfo="login">微信登录</button>
+<button class="Button buttonLogin" size="default" open-type="getUserInfo" bindgetuserinfo="login">微信登录</button>
 
 <!-- 白色矩形样式 -->
 <!-- <view class="whiterectangle">

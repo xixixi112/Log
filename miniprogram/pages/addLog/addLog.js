@@ -13,6 +13,7 @@ Page({
 		showLocation: "点击选择位置",
 		curLocation: "",
 		dailyTitle: "",
+		subhead: "",
 		showImgUrl: "点击选择封面",
 		ImgUrl: "",
 		userInfo: getApp().globalData.userInfo
@@ -69,6 +70,12 @@ Page({
 		})
 		console.log(this.data.dailyTitle)
 	},
+	loseSubHeadBlur(e) {
+		this.setData({
+			subhead: e.detail.value
+		})
+		console.log(this.data.subhead)
+	},
 	getCurLocation(res) {
 		let _this = this
 		wx.getLocation({
@@ -108,8 +115,7 @@ Page({
 			sourceType: ['album', 'camera'],
 			success: (res) => {
 				// tempFilePath可以作为img标签的src属性显示图片
-				console.log(res.tempFilePaths)
-				
+				// console.log(res.tempFilePaths)
 				that.setData({
 					// ImgUrl: res.tempFilePaths[0],
 					showImgUrl: "封面选择完成"
@@ -236,7 +242,6 @@ Page({
 					})
 				} else {
 					var saveArr = getApp().globalData.logs;
-					// displayValue 日期 curLocation 位置 imgurl封皮 html 返回的链接 maxDate
 					console.log('userId: ' + getApp().globalData.userInfo.userId)
 					let obj = {
 						image: that.data.ImgUrl,
@@ -244,7 +249,7 @@ Page({
 						title: that.data.dailyTitle,
 						time: that.data.displayValue,
 						location: that.data.curLocation,
-						subhead: '还没写',
+						subhead: that.data.subhead,
 						userId: getApp().globalData.userInfo.userId
 					}
 					saveArr.push(obj);

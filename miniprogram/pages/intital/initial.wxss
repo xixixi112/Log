@@ -50,30 +50,34 @@
 .container .Button{
   z-index: 3;
   position: absolute;
-  width: 240rpx;
-  height: 100rpx;
-  border-radius: 10rpx;
+  width: 550rpx;
+  height: 120rpx;
+  border-radius: 25rpx;
   text-align: center;
-  line-height: 50rpx;
-  opacity: 0.65;
-  font-size: 36rpx;
-  font-family: PingFangSC-regular;
+  /* line-height: 55rpx; */
+  /* opacity: 0.65; */
+  font-size: 50rpx;
+  letter-spacing: 10rpx;
+  color: white;
+  font-weight: 550;
+  /* font-family: 'Courier New', Courier, monospace; */
+  /* font-family: PingFangSC-regular; */
 }
 
 /* 注册按钮样式 */
-.container .buttonRegister{
-  left: 80rpx;
+/* .container .buttonRegister{
+  left: -20rpx;
   top: 79%;
-  background-color: rgba(255, 255, 255, 100);
-  border: 4rpx solid rgba(87, 178, 251, 100);
-}
+  background-color: #04BE02;
+  /* border: 4rpx solid rgba(87, 178, 251, 100); */
+/* } */
 
 /* 登录按钮样式 */
 .container .buttonLogin{
-  left: 420rpx;
-  top: 79%;
-  background-color: rgba(87, 178, 251, 100);
-  border: 4rpx solid rgba(255, 255, 255, 100);
+  left: 110rpx;
+  top: 60%;
+  background-color: green;
+  /* border: 2rpx solid rgba(255, 255, 255, 100); */
 }
 
 /* 白条样式 */
