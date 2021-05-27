@@ -74,7 +74,7 @@
     <swiper class="context" circular="{{true}}" current="{{index}}" bind:change="changeTab">
         <swiper-item >
           <scroll-view scroll-y="true" style="height: 900rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-          <view wx:for="{{logList}}" class="logDetail" bindtap="getLogDetail" >
+          <view wx:for="{{myLogs}}" class="logDetail" bindtap="getLogDetail" >
             <title-card
               img='{{item.image}}'
               title='{{item.title}}'
