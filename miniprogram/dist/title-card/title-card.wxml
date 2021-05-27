@@ -1,0 +1,25 @@
+<!--dist/cards/title-card/title-card.wxml-->
+
+<view class='wx-cards-title-card'>
+  <view class='pc'>
+    <image class="image" mode="aspectFill" src='{{img}}'></image>
+  </view>
+  <view class='title {{titleSize === "mini"? "mini" : ""}}'>
+    {{title}}
+  </view>
+  <view wx:if="{{context}}" class='context'>
+    {{context}}
+  </view>
+  <view class='buttons' style='display: {{isShowBtns ? "" : "none"}}'>
+    <view class="item">
+      <tag style="margin-bottom: 16rpx;" wx:if="{{tag}}" class="i-tags" color="{{tagColor}}">{{tag}}</tag>
+    </view>
+    <view wx:if="{{isShowLike}}" class='item'>
+      <icon-button type='like' style='display: {{isLiked ? "none" : ""}};' bindtap='handleLike'></icon-button>
+      <icon-button type='red-like' style='display: {{isLiked ? "" : "none"}};' bindtap='handleLike'></icon-button>
+      <view class='like-number'>{{likeNumber}}</view>
+      <!-- <icon-button type='delete' wx:if='{{isShowDelete}}' bindtap='handleDelete'></icon-button> -->
+    </view>
+  </view>
+</view>
+

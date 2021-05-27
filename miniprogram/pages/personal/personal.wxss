@@ -181,12 +181,14 @@
 
 .bottom{
   font-size: 35rpx;
-  width: 100%;
+  width: 94%;
   height: 800rpx;
   position: relative;
   background-color:white;
   color:rgb(94, 94, 94);
   border-radius: 50rpx;
+  margin-left:1%;
+ 
 }
 
 .bottom .logsInfoArea{
@@ -203,4 +205,36 @@
 
 .bottom .logsInfoArea .likes{
   margin-left: 15%;
+}
+
+.tab{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  color:rgb(158, 157, 157);
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+ 
+.icon{
+  color: darkslategrey;
+}
+
+.context{
+  height:2000rpx;
+}
+
+.divLine{
+  background: #f0f0ef;
+  width: 100%;
+  height: 1rpx;
+}
+
+.logDetail{
+  background-color: #ffffff;
+  margin-top: 5rpx;
+  margin-bottom: 30rpx;
+  /* border: 1rpx solid black; */
+  border-radius: 10rpx;
 }

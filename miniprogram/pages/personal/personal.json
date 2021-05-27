@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "title-card": "../../dist/title-card/title-card"
+  },
   "navigationBarTitleText": "个人主页"
 }

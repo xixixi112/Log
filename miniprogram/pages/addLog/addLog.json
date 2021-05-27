@@ -7,6 +7,7 @@
     "wux-cell-group": "../../dist/cell-group/index",
     "wux-cell": "../../dist/cell/index",
     "wux-button": "../../dist/button/index",
-    "wux-input": "../../dist/input/index"
+    "wux-input": "../../dist/input/index",
+    "richText":"../../components/richText/richText"
 }
 }

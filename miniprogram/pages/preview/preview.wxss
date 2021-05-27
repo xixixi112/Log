@@ -1,0 +1,13 @@
+.editor {
+  box-sizing: border-box;
+  padding: 12px 15px;
+  width: 100%;
+  min-height: 60vh;
+  height: auto;
+  background: #fff;
+  font-size: 24rpx;
+  line-height: 1.5;
+}
+.viewLog{
+    height: 80%
+}

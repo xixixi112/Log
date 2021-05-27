@@ -1,5 +1,9 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "title-card": "../../dist/title-card/title-card",
+    "card": "../../dist/standard-card/standard-card"
+},
+
   "navigationBarTitleText": "日志"
   
 }

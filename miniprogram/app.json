@@ -8,9 +8,7 @@
     "pages/personal/personal",
     "pages/index/index",
     "pages/addLog/addLog",
-    
-    
-  
+    "pages/preview/preview",
     "pages/logDetail/logDetail",
     "pages/editData/editData",
     "pages/setting/setting"

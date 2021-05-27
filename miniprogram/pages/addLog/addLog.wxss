@@ -66,3 +66,32 @@
   /* background-color: rgba(244,244,244); */
   border-radius: 10rpx;
 }
+.preview{
+  position: relative; 
+  width: 34%;
+  height: 70rpx;
+  line-height: 72rpx;
+  margin-left: 1%;
+  margin-top: 10%;
+  text-align: center;
+  font-size:26rpx;
+  color: #ffffff;
+  background-color: rgb(194, 194, 194);
+}
+
+.submit{
+  position: relative; 
+  width: 34%;
+  height: 70rpx;
+  line-height: 72rpx;
+  margin-left: 10%;
+  margin-top: 10%;
+  text-align: center;
+  font-size:26rpx;
+  color: #ffffff;
+  background-color: darkslategrey;
+}
+
+.button{
+  display:flex;justify-content:space-around;
+}
