@@ -8,21 +8,24 @@
 
 <!-- 日志列表 -->
   <view class="logshowArea">
-  <view class="logDetail" bindtap="getLogDetail">
-    <view class="logTime">
-      <text class="iconfont icon-time"></text>
-      {{LogTime}}
+  <view wx:for="{{list}}" class="logDetail" bindtap="getLogDetail" >
+    
+    <view class="logTitle">{{item.title}}</view>
+    <view >
+      <image src="{{item.image}}" mode="aspectFill"></image>
     </view>
-    <view class="logTitle">{{LogTitle}}</view>
-    <view class="logImg">
-      <image src="{{LogImg}}"></image>
+    <view class = "logSubHead">
+      <text>{{item.subhead}}</text>
     </view>
-    <view class="logLocation">
-      <text class="iconfont icon-weizhibiaoji"></text>
-      {{LogLocation}}
+   
+    <view >
+     
+        <text class="iconfont icon-weizhibiaoji">{{item.location}}</text>
+        <text class="logTime" >{{item.time}}</text>
+  
     </view>
   </view>
-  <view class="logDetail">
+  <!-- <view class="logDetail">
     <view class="logTime">
       <text class="iconfont icon-time"></text>
       2021.5.21
@@ -35,7 +38,7 @@
       <text class="iconfont icon-weizhibiaoji"></text>
       北京
     </view>
-  </view>
+  </view> -->
 </view>
 
 
