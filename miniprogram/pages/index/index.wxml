@@ -14,7 +14,7 @@
     title='{{item.title}}'
     time='{{item.time}}'
     img='{{item.image}}'
-    context='{{item.subhead}}'
+    context='{{item.abstract}}'
     moreText="Pizza remains America's favorite food, but one that many people hesitate to make at home. In Mastering Pizza, award-winning chef Marc Vetri tackles the topic with his trademark precision, making perfect pizza available to anyone. \n\nThe recipes—gleaned from years spent researching recipes in Italy and perfecting them in America—have a variety of base doughs of different hydration levels, which allow home cooks to achieve the same results with a regular kitchen oven as they would with a professional pizza oven. \n\nThe book covers popular standards like Margherita and Carbonara while also featuring unexpected toppings such as mussels and truffles—and even a dessert pizza made with Nutella. \n\nWith transporting imagery from Italy and hardworking step-by-step photos to demystify the process, Mastering Pizza will help you make pizza as delicious as you find in Italy."
     tag='标签一'
     tagColor='blue'
@@ -32,7 +32,7 @@
     <!-- <title-card
     img='{{item.image}}'
     title='{{item.title}}'
-    context='{{item.subhead}}'
+    context='{{item.abstract}}'
     isShowBtns='{{true}}'
     isLiked='{{false}}'
     likeNumber='{{30}}'

@@ -222,7 +222,7 @@
 }
 
 .context{
-  height:2000rpx;
+  min-height: 900rpx;
 }
 
 .divLine{
