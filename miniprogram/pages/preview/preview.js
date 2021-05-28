@@ -26,9 +26,9 @@ Page({
   onEditorReady() {
     wx.createSelectorQuery().select('#editor').context(res => {
       this.editorCtx = res.context;
-      console.log(app.data.richTextContents)
+      console.log(app.globalData.data.richTextContents)
       this.editorCtx.setContents({
-        html: app.data.richTextContents,
+        html: app.globalData.data.richTextContents,
         success: res => {
           console.log('[setContents success]')
         }

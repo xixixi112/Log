@@ -143,8 +143,8 @@ Page({
 			value
 		} = res.detail;
 		// console.log('[bindinput callback]=>', value)
-		console.log(app.data.richTextContents)
-		app.data.richTextContents = value.detail.html;
+		console.log(app.globalData.data.richTextContents)
+		app.globalData.data.richTextContents = value.detail.html;
 	},
 
 	//预览富文本
