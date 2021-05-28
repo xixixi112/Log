@@ -32,7 +32,7 @@
     </view>
     <view class="dialyAbstract">
       <wux-cell hover-class='none'>
-        <wux-input label="文章摘要" placeholder="请输入文章摘要(20字以内)" maxlength="20" value="{{dailyTitle}}" controlled="true" bind:blur="loseDailyTitleBlur">
+        <wux-input label="文章摘要" placeholder="请输入文章摘要(20字以内)" maxlength="20" value="{{subhead}}" controlled="true" bind:blur="loseSubHeadBlur">
         </wux-input>
       </wux-cell>
     </view>
@@ -72,7 +72,7 @@
     bind:bindblur='bindblur' 
     bind:bindinput='bindinput' 
     bind:insertImageEvent='insertImageEvent' 
-    bind:getEditorContent='getEditorContent'></richText>
+    bind:getEditorContent='getContents'></richText>
   </view>
   </scroll-view>
 <view class="button">

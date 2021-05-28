@@ -1,4 +1,5 @@
 {
+  "setting": {},
   "condition": {
     "plugin": {
       "list": []
@@ -21,6 +22,17 @@
           "name": "pages/personal/personal",
           "pathName": "pages/personal/personal",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/intital/initial",
+          "pathName": "pages/intital/initial",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/personal/personal",
+          "pathName": "pages/personal/personal",
           "scene": null
         }
       ]

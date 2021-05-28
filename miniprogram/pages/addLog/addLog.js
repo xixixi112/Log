@@ -1,9 +1,9 @@
 var util = require('../../utils/util.js');
 const app = getApp();
-let richText = null;  //富文本编辑器实例
+let richText = null; //富文本编辑器实例
 Page({
-  data: {
-    formats: {},
+	data: {
+		formats: {},
 		readOnly: false,
 		placeholder: '开始输入...',
 		editorHeight: 300,
@@ -19,150 +19,150 @@ Page({
 		showImgUrl: "点击选择封面",
 		ImgUrl: "",
 		userInfo: getApp().globalData.userInfo
-  },
-  onShow: function () {
+	},
+	onShow: function() {
 
-  },
+	},
 
-  // 编辑器初始化完成时触发，可以获取组件实例
-  onEditorReady() {
-    console.log('[onEditorReady callback]')
-    console.log('000')
-    richText = this.selectComponent('#richText'); //获取组件实例
-  },
+	// 编辑器初始化完成时触发，可以获取组件实例
+	onEditorReady() {
+		console.log('[onEditorReady callback]')
+		console.log('000')
+		richText = this.selectComponent('#richText'); //获取组件实例
+	},
 
-  //设置富文本内容
-  setContents(rechtext) {
-    this.editorCtx.setContents({
-      html: rechtext,
-      success: res => {
-        console.log('[setContents success]', res)
-      }
-    })
-  },
+	//设置富文本内容
+	setContents(rechtext) {
+		this.editorCtx.setContents({
+			html: rechtext,
+			success: res => {
+				console.log('[setContents success]', res)
+			}
+		})
+	},
 
-  //撤销
-  undo() {
-    console.log('[undo callback]')
-  },
+	//撤销
+	undo() {
+		console.log('[undo callback]')
+	},
 
-  //恢复
-  restore() {
-    console.log('[restore callback]')
-  },
+	//恢复
+	restore() {
+		console.log('[restore callback]')
+	},
 
-  //清空编辑器内容
-  clear() {
-    this.editorCtx.clear({
-      success: res => {
-        console.log("[clear success]", res)
-      }
-    })
-  },
+	//清空编辑器内容
+	clear() {
+		this.editorCtx.clear({
+			success: res => {
+				console.log("[clear success]", res)
+			}
+		})
+	},
 
-  //清空编辑器事件
-  clearBeforeEvent(){
-    console.log('[clearBeforeEvent callback]')
-    wx.showModal({
-      cancelText: '取消',
-      confirmText: '确认',
-      content: '确认清空编辑器内容吗？',
-      success: (result) => {
-        if(result.confirm){
-          richText.clear();
-        }
-      },
-      fail: (res) => {},
-    })
-  },
+	//清空编辑器事件
+	clearBeforeEvent() {
+		console.log('[clearBeforeEvent callback]')
+		wx.showModal({
+			cancelText: '取消',
+			confirmText: '确认',
+			content: '确认清空编辑器内容吗？',
+			success: (result) => {
+				if (result.confirm) {
+					richText.clear();
+				}
+			},
+			fail: (res) => {},
+		})
+	},
 
-  //清空编辑器成功回调
-  clearSuccess(){
-    console.log('[clearSuccess callback]')
-  },
+	//清空编辑器成功回调
+	clearSuccess() {
+		console.log('[clearSuccess callback]')
+	},
 
-  //清除当前选区的样式
-  removeFormat() {
-    this.editorCtx.removeFormat();
-  },
+	//清除当前选区的样式
+	removeFormat() {
+		this.editorCtx.removeFormat();
+	},
 
-  //插入图片
-  insertImageEvent() {
-    wx.chooseImage({
-      count: 1,
-      success: res => {
-        let path = res.tempFilePaths[0];
-        //调用子组件方法，图片应先上传再插入，不然预览时无法查看图片。
-        richText.insertImageMethod(path).then(res => {
-          console.log('[insert image success callback]=>', res)
-        }).catch(res => {
-          console.log('[insert image fail callback]=>', res)
-        });
-      }
-    })
-  },
+	//插入图片
+	insertImageEvent() {
+		wx.chooseImage({
+			count: 1,
+			success: res => {
+				let path = res.tempFilePaths[0];
+				//调用子组件方法，图片应先上传再插入，不然预览时无法查看图片。
+				richText.insertImageMethod(path).then(res => {
+					console.log('[insert image success callback]=>', res)
+				}).catch(res => {
+					console.log('[insert image fail callback]=>', res)
+				});
+			}
+		})
+	},
 
-  //保存，获取编辑器内容
-  getEditorContent(res) {
-    let {
-      value
-    } = res.detail;
-    wx.showToast({
-      title: '获取编辑器内容成功',
-      icon: 'none',
-    })
-    console.log('[getEditorContent callback]=>', value)
-  },
+	//保存，获取编辑器内容
+	getEditorContent(res) {
+		let {
+			value
+		} = res.detail;
+		wx.showToast({
+			title: '获取编辑器内容成功',
+			icon: 'none',
+		})
+		console.log('[getEditorContent callback]=>', value)
+	},
 
-  //show文本工具栏
-  showTextTool() {
-    this.setData({
-      textTool: !this.data.textTool
-    })
-  },
+	//show文本工具栏
+	showTextTool() {
+		this.setData({
+			textTool: !this.data.textTool
+		})
+	},
 
-  //编辑器聚焦时触发
-  bindfocus(res) {
-    let {
-      value
-    } = res.detail;
-    // console.log('[bindfocus callback]=>', value)
-  },
+	//编辑器聚焦时触发
+	bindfocus(res) {
+		let {
+			value
+		} = res.detail;
+		// console.log('[bindfocus callback]=>', value)
+	},
 
-  //编辑器失去焦点时触发
-  bindblur(res) {
-    let {
-      value
-    } = res.detail;
-    // console.log('[bindblur callback]=>', value)
-  },
+	//编辑器失去焦点时触发
+	bindblur(res) {
+		let {
+			value
+		} = res.detail;
+		// console.log('[bindblur callback]=>', value)
+	},
 
-  //编辑器输入中时触发
-  bindinput(res) {
-    let {
-      value
-    } = res.detail;
-    // console.log('[bindinput callback]=>', value)
-    console.log(app.data.richTextContents)
-    app.data.richTextContents = value.detail.html;
-  },
+	//编辑器输入中时触发
+	bindinput(res) {
+		let {
+			value
+		} = res.detail;
+		// console.log('[bindinput callback]=>', value)
+		console.log(app.data.richTextContents)
+		app.data.richTextContents = value.detail.html;
+	},
 
-  //预览富文本
-  preview(){
-    wx.navigateTo({
-      url: `../preview/preview`,
-    })
-  },
-  readOnlyChange() {
-    this.setData({
-      readOnly: !this.data.readOnly
-    })
-  },
-  onLoad() {
-    let value = util.formatTime(new Date());
-    // 再通过setData更改Page()里面的data，动态更新页面的数据
-   
-    this.setData({
+	//预览富文本
+	preview() {
+		wx.navigateTo({
+			url: `../preview/preview`,
+		})
+	},
+	readOnlyChange() {
+		this.setData({
+			readOnly: !this.data.readOnly
+		})
+	},
+	onLoad() {
+		let value = util.formatTime(new Date());
+		// 再通过setData更改Page()里面的data，动态更新页面的数据
+
+		this.setData({
 			curTime: value,
 			maxDate: value,
 			userInfo: getApp().globalData.userInfo
@@ -189,8 +189,8 @@ Page({
 				})
 			}, duration)
 
-    })
-  },
+		})
+	},
 	onChooseData(e) {
 		console.log(e);
 		this.setData({
@@ -261,7 +261,7 @@ Page({
 				wx.cloud.uploadFile({
 					cloudPath, //云存储图片名字
 					filePath, //临时路径
-					success: res => {						
+					success: res => {
 						that.setData({
 							ImgUrl: res.fileID, //云存储图片路径,可以把这个路径存到集合，要用的时候再取出来
 						});

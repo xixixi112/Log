@@ -16,28 +16,16 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-		wx.setNavigationBarTitle({
-			title: '个人'
-		})
+		// wx.setNavigationBarTitle({
+		// 	title: '个人'
+		// })
 		//当重新加载这个页面时，查看是否有已经登录的信息
-		let userInfo = wx.getStorageSync("userInfo");
-		
-		console.log("userInfo: " + JSON.stringify(userInfo))
-		
+		let userInfo = wx.getStorageSync("userInfo")
 		this.username = userInfo.username
-		// console.log("userName: " + username)
 		if (this.username) {
-			// this.setData({
-			// 	username: userInfo.username,
-			// 	avatar: userInfo.avatar,
-			// 	signature: userInfo.signature,
-			// 	gender: userInfo.gender
-			// })
-			// console.log("进入if： " + username)
 			getApp().globalData.userInfo = userInfo
-			console.log(JSON.stringify(getApp().globalData.userInfo))
 		}
-		
+		     
 		wx.getSetting({
 			success: res => {
 				if (res.authSetting['scope.userInfo']) {
