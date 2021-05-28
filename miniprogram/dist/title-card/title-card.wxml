@@ -16,7 +16,7 @@
     </view>
     <view wx:if="{{isShowLike}}" class='item'>
       <!-- <icon-button type='like' style='display: {{isLiked ? "none" : ""}};' bindtap='handleLike'></icon-button> -->
-      <icon-button type='red-like' ></icon-button>
+      <icon-button type='like' ></icon-button>
       <view class='like-number'>{{likeNumber}}</view>
       <!-- <icon-button type='delete' wx:if='{{isShowDelete}}' bindtap='handleDelete'></icon-button> -->
     </view>

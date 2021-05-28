@@ -17,30 +17,54 @@ Page({
 		Logdetail: "",
 		LogInfo: [],
 		curTime: "",
-		list: [],
+    list: [],
+    username:"",
+    avatar:"",
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-		getApp().globalData.userInfo = wx.getStorageSync("userInfo")
+    getApp().globalData.userInfo = wx.getStorageSync("userInfo")
+    let userInfo = getApp().globalData.userInfo
 		wx.cloud.callFunction({
-				name: 'getLog',
+				name: 'getPublicLogs',
 			}).then(res => {
-				console.log('请求云函数成功', res.result.data);
-				var data = res.result.data;
+				console.log('请求云函数成功', res.result.list);
+        var data = res.result.list;
+        data.sort(this.compare('time'));
 				for (let i = 0; i < data.length; i++) {
 					data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
-				}
-				this.setData({
-					list: data
+        }
+        getApp().globalData.logs = data
+        var data1 = data.filter(item => item.public == true);
+        this.setData({
+          list: data1,
 				})
-				getApp().globalData.logs = data
+        getApp().globalData.publiclogs = data1
 			})
 			.catch(err => {
 				console.log('请求云函数失败', err);
-			})
+      })
+  
+        // wx.cloud.callFunction({
+        //     name: 'getPublicLogs',
+        //   }).then(res => {
+        //     console.log('请求云函数成功', res.result.list);
+        //     var data = res.result.list;
+        //    // data.sort(this.compare('time'));
+        //     // for (let i = 0; i < data.length; i++) {
+        //     //   data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
+        //     // }
+        //     this.setData({
+        //       list: data
+        //     })
+        //     getApp().globalData.publiclogs = data
+        //   })
+        //   .catch(err => {
+        //     console.log('请求云函数失败', err);
+        //   })
 
 		//console.log({list});
 		// wx.getStorage({
@@ -71,7 +95,17 @@ Page({
 				})
 			}
 		})
-	},
+  },
+  
+  compare: function(property) {
+    return function(a, b) {
+      var value1 = Date.parse(a[property]);
+      var value2 = Date.parse(b[property]);
+      // console.log(value1);
+      // console.log(value2);
+      return value2 - value1;
+    }
+  },
 	//可拖动悬浮按钮点击事件
 	btn_Suspension_click() {
 		wx.navigateTo({
@@ -133,7 +167,7 @@ Page({
 	 */
 	onShow: function() {
 		this.setData({
-			list: getApp().globalData.logs
+			list: getApp().globalData.publiclogs
 		})
 	},
 

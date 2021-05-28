@@ -57,6 +57,7 @@ App({
 				signature: ''
 			},
 			logs: [],
+			publiclogs:[],
 			data: {}
 		}
 		

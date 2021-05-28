@@ -10,8 +10,8 @@
   <view class="logshowArea">
   <view wx:for="{{list}}" class="logDetail" >
     <card
-    headerImg='../../static/image/headPartrait.jpg'
-    user = 'elina'
+    headerImg='{{item.avatar}}'
+    user = '{{item.username}}'
     title='{{item.title}}'
     time='{{item.time}}'
     img='{{item.image}}'
@@ -21,7 +21,7 @@
     tagColor='blue'
     isShowLike="{{true}}"
     isLiked="{{false}}"
-    likeNumber='{{10}}'
+    likeNumber='{{item.like}}'
     isShowUnlike="{{true}}"
     isUnLiked="{{false}}"
     unlikeNumber='{{2}}'

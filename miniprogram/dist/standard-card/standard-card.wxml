@@ -25,7 +25,7 @@
       <icon-button type='{{isLiked ? "red-like" : "like"}}' style='display: {{isShowLike ? "" : "none"}};' bindtap='handleLike'></icon-button>
       <text class='number' style='display: {{likeNumber ? "" : "none"}}'>{{likeNumber}}</text>
       <icon-button type='{{isUnliked ? "collection" : "uncollection"}}' style='display: {{isShowUnlike ? "" : "none"}};' bindtap='handleUnlike'></icon-button>
-      <text class='number' style='display: {{unlikeNumber ? "" : "none"}}'>{{unlikeNumber}}</text>
+      <!-- <text class='number' style='display: {{unlikeNumber ? "" : "none"}}'>{{unlikeNumber}}</text> -->
       <icon-button type='delete' wx:if='{{isShowDelete}}' bindtap='handleDelete'></icon-button>
       <!-- TODO should show the share button in the futrue -->
       <!-- <icon-button type='share' bindtap='handleShare'></icon-button> -->

@@ -8,5 +8,5 @@ exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   //console.log("111")
   //console.log(cloud.database().collection('logs').get());
-  return cloud.database().collection('logs').get()
+  return cloud.database().collection('logs').orderBy("time",'desc').get()
 }
