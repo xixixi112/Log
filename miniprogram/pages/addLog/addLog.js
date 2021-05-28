@@ -385,7 +385,9 @@ Page({
 				userId: getApp().globalData.userInfo.userId
 			}
 			saveArr.push(obj);
+			console.log(saveArr)
 			getApp().globalData.logs = saveArr
+			console.log(getApp().globalData.logs)
 			//把图片存到users集合表
 			const db = wx.cloud.database();
 			db.collection("logs").add({

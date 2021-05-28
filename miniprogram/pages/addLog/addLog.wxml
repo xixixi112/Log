@@ -1,7 +1,7 @@
 <!-- 顶部功能按钮 -->
 <!-- <view class="toolbar" catchtouchend="format"> -->
-  <!-- <view class="toolbar" catchtouchend="format" hidden="{{keyboardHeight > 0 ? true : false}}" style="bottom: {{isIOS ? keyboardHeight : 0}}px"></view> -->
-  <!-- <i class="iconfont icon-baocun" catchtouchend="getContents"></i>
+<!-- <view class="toolbar" catchtouchend="format" hidden="{{keyboardHeight > 0 ? true : false}}" style="bottom: {{isIOS ? keyboardHeight : 0}}px"></view> -->
+<!-- <i class="iconfont icon-baocun" catchtouchend="getContents"></i>
   <i class="iconfont icon-charutupian" catchtouchend="insertImage"></i>
   <i class="iconfont icon-fengexian" catchtouchend="insertDivider"></i>
   <i class="iconfont icon-format-header-1 {{formats.header === 1 ? 'ql-active' : ''}}" data-name="header" data-value="{{1}}"></i>
@@ -24,63 +24,55 @@
 
 <!-- 日记信息输入部分 -->
 <view class="dailyInfo">
-    <view class="dialyTitle">
-      <wux-cell hover-class='none'>
-        <wux-input label="文章标题" placeholder="请输入文章标题(10字以内)" maxlength="10" value="{{dailyTitle}}" controlled="true" bind:blur="loseDailyTitleBlur">
-        </wux-input>
-      </wux-cell>
-    </view>
-    <view class="dialyAbstract">
-      <wux-cell hover-class='none'>
-        <wux-input label="文章摘要" placeholder="请输入文章摘要(20字以内)" maxlength="20" value="{{abstract}}" controlled="true" bind:blur="loseAbstractBlur">
-        </wux-input>
-      </wux-cell>
-    </view>
-    <view class="selectData">
-      <wux-date-picker mode="datetime" value="{{ curTime }}" maxDate="{{maxDate}}" bind:confirm="onChooseData">
-        <wux-cell title="选择日期" is-link extra="{{ displayValue }}"></wux-cell>
-      </wux-date-picker>
-    </view>
-   
-    <view class="curLocation" bind:click="getCurLocation">
-      <wux-cell title="选择位置" is-link extra="{{ showLocation }}"></wux-cell>
-    </view>
-    <view class="showimgUrl">
-      <wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrlFace"></wux-cell>
-    </view>
-    <view class="showimgUrl">
-      <wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrl"></wux-cell>
-    </view>
-  </view>
+	<view class="dialyTitle">
+		<wux-cell hover-class='none'>
+			<wux-input label="文章标题" placeholder="请输入文章标题(10字以内)" maxlength="10" value="{{dailyTitle}}" controlled="true"
+				bind:blur="loseDailyTitleBlur">
+			</wux-input>
+		</wux-cell>
+	</view>
+	<view class="dialyAbstract">
+		<wux-cell hover-class='none'>
+			<wux-input label="文章摘要" placeholder="请输入文章摘要(20字以内)" maxlength="20" value="{{abstract}}" controlled="true"
+				bind:blur="loseAbstractBlur">
+			</wux-input>
+		</wux-cell>
+	</view>
+	<view class="selectData">
+		<wux-date-picker mode="datetime" value="{{ curTime }}" maxDate="{{maxDate}}" bind:confirm="onChooseData">
+			<wux-cell title="选择日期" is-link extra="{{ displayValue }}"></wux-cell>
+		</wux-date-picker>
+	</view>
 
+	<view class="curLocation">
+		<wux-cell title="选择位置" is-link extra="{{ showLocation }}" bind:click="getCurLocation"></wux-cell>
+	</view>
 
-  <!-- 输入文本区域 -->
-<scroll-view scroll-y="true" style="height: 520rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-  <!-- <view class="container" style="height:{{editorHeight}}px;"></view> -->
-  <!-- <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange" bindready="onEditorReady" show-img-size="true"> -->
-    <view >
-  <!-- </editor> -->
-    <richText 
-    id='richText' 
-    readOnly='{{readOnly}}'
-    placeholder='{{placeholder}}' 
-    formatDate='YY/MM/DD'
-    buttonTxt='保存'
-    bind:clearBeforeEvent='clearBeforeEvent'
-    bind:clearSuccess='clearSuccess'
-    bind:undo='undo'
-    bind:restore='restore'
-    bind:onEditorReady='onEditorReady' 
-    bind:bindfocus='bindfocus' 
-    bind:bindblur='bindblur' 
-    bind:bindinput='bindinput' 
-    bind:insertImageEvent='insertImageEvent' 
-    bind:getEditorContent='getEditorContents'></richText>
-  </view>
-  </scroll-view>
-<view class="button">
-  <view class="preview" bindtap="preview">预览</view>
-  <view class="submit" bindtap="getContents">提交</view>
+	<view class="showimgUrl">
+		<wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrl"></wux-cell>
+	</view>
+
+	<!-- <view class="showimgUrl">
+		<wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrl"></wux-cell>
+	</view> -->
 </view>
 
- 
+
+<!-- 输入文本区域 -->
+<scroll-view scroll-y="true" style="height: 520rpx;" bindscrolltoupper="upper" bindscrolltolower="lower"
+	bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+	<!-- <view class="container" style="height:{{editorHeight}}px;"></view> -->
+	<!-- <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange" bindready="onEditorReady" show-img-size="true"> -->
+	<view>
+		<!-- </editor> -->
+		<richText id='richText' readOnly='{{readOnly}}' placeholder='{{placeholder}}' formatDate='YY/MM/DD'
+			buttonTxt='保存' bind:clearBeforeEvent='clearBeforeEvent' bind:clearSuccess='clearSuccess' bind:undo='undo'
+			bind:restore='restore' bind:onEditorReady='onEditorReady' bind:bindfocus='bindfocus'
+			bind:bindblur='bindblur' bind:bindinput='bindinput' bind:insertImageEvent='insertImageEvent'
+			bind:getEditorContent='getEditorContents'></richText>
+	</view>
+</scroll-view>
+<view class="button">
+	<view class="preview" bindtap="preview">预览</view>
+	<view class="submit" bindtap="getContents">提交</view>
+</view>
