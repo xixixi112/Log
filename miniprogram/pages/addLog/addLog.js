@@ -423,6 +423,7 @@ Page({
 		}
 	},
 
+
 	removeFormat() {
 		this.editorCtx.removeFormat()
 	},
