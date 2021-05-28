@@ -15,8 +15,8 @@
       <tag style="margin-bottom: 16rpx;" wx:if="{{tag}}" class="i-tags" color="{{tagColor}}">{{tag}}</tag>
     </view>
     <view wx:if="{{isShowLike}}" class='item'>
-      <icon-button type='like' style='display: {{isLiked ? "none" : ""}};' bindtap='handleLike'></icon-button>
-      <icon-button type='red-like' style='display: {{isLiked ? "" : "none"}};' bindtap='handleLike'></icon-button>
+      <!-- <icon-button type='like' style='display: {{isLiked ? "none" : ""}};' bindtap='handleLike'></icon-button> -->
+      <icon-button type='red-like' ></icon-button>
       <view class='like-number'>{{likeNumber}}</view>
       <!-- <icon-button type='delete' wx:if='{{isShowDelete}}' bindtap='handleDelete'></icon-button> -->
     </view>
