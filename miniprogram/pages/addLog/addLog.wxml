@@ -42,11 +42,11 @@
       </wux-date-picker>
     </view>
    
-    <view class="curLocation">
-      <wux-cell title="选择位置" is-link extra="{{ showLocation }}" bind:click="getCurLocation"></wux-cell>
+    <view class="curLocation" bind:click="getCurLocation">
+      <wux-cell title="选择位置" is-link extra="{{ showLocation }}"></wux-cell>
     </view>
     <view class="showimgUrl">
-      <wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrl"></wux-cell>
+      <wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrlFace"></wux-cell>
     </view>
   </view>
 
@@ -72,12 +72,12 @@
     bind:bindblur='bindblur' 
     bind:bindinput='bindinput' 
     bind:insertImageEvent='insertImageEvent' 
-    bind:getEditorContent='getContents'></richText>
+    bind:getEditorContent='getEditorContents'></richText>
   </view>
   </scroll-view>
 <view class="button">
   <view class="preview" bindtap="preview">预览</view>
-  <view class="submit" bindtap="submit">提交</view>
+  <view class="submit" bindtap="getContents">提交</view>
 </view>
 
  

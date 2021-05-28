@@ -56,7 +56,8 @@ App({
 				avatar: '',
 				signature: ''
 			},
-			logs: []
+			logs: [],
+			data: {}
 		}
 		
 		let userInfo = wx.getStorageSync("userInfo")

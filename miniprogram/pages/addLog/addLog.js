@@ -143,8 +143,8 @@ Page({
 			value
 		} = res.detail;
 		// console.log('[bindinput callback]=>', value)
-		console.log(app.data.richTextContents)
-		app.data.richTextContents = value.detail.html;
+		console.log(app.globalData.data.richTextContents)
+		app.globalData.data.richTextContents = value.detail.html;
 	},
 
 	//预览富文本
@@ -242,7 +242,7 @@ Page({
 		})
 	},
 
-	getImgUrl() {
+	getImgUrlFace() {
 		let that = this;
 		wx.chooseImage({
 			count: 1,
@@ -250,7 +250,7 @@ Page({
 			sourceType: ['album', 'camera'],
 			success: (res) => {
 				// tempFilePath可以作为img标签的src属性显示图片
-				// console.log(res.tempFilePaths)
+				console.log(res.tempFilePaths)
 				that.setData({
 					// ImgUrl: res.tempFilePaths[0],
 					showImgUrl: "封面选择完成"
@@ -301,12 +301,12 @@ Page({
 		const navigationBarHeight = isIOS ? 44 : 48
 		return statusBarHeight + navigationBarHeight
 	},
-	onEditorReady() {
-		const that = this
-		wx.createSelectorQuery().select('#editor').context(function(res) {
-			that.editorCtx = res.context
-		}).exec()
-	},
+	// onEditorReady() {
+	// 	const that = this
+	// 	wx.createSelectorQuery().select('#editor').context(function(res) {
+	// 		that.editorCtx = res.context
+	// 	}).exec()
+	// },
 	blur() {
 		this.editorCtx.blur()
 	},
@@ -365,68 +365,64 @@ Page({
 	getContents() {
 		// 存储数据
 		var that = this;
-		this.editorCtx.getContents({
-			success: function(res) {
-				console.log(res)
-				if (that.data.dailyTitle === "" || that.data.displayValue === "点击选择日期" || that.data
-					.curLocation === "" || that.data.ImgUrl === "") {
+		if (that.data.dailyTitle === "" || that.data.displayValue === "点击选择日期" || that.data
+			.curLocation === "" || that.data.ImgUrl === "") {
+			wx.showToast({
+				title: '请填写必要信息',
+				icon: 'error',
+				duration: 1500
+			})
+		} else {
+			var saveArr = getApp().globalData.logs;
+			console.log('userId: ' + getApp().globalData.userInfo.userId)
+			let obj = {
+				image: that.data.ImgUrl,
+				detail: app.globalData.data.richTextContents,
+				title: that.data.dailyTitle,
+				time: that.data.displayValue,
+				location: that.data.curLocation,
+				subhead: that.data.subhead,
+				userId: getApp().globalData.userInfo.userId
+			}
+			saveArr.push(obj);
+			getApp().globalData.logs = saveArr
+			//把图片存到users集合表
+			const db = wx.cloud.database();
+			db.collection("logs").add({
+				data: obj,
+				success: function() {
 					wx.showToast({
-						title: '请填写必要信息',
-						icon: 'error',
+						title: '保存成功',
+						icon: 'success',
 						duration: 1500
 					})
-				} else {
-					var saveArr = getApp().globalData.logs;
-					console.log('userId: ' + getApp().globalData.userInfo.userId)
-					let obj = {
-						image: that.data.ImgUrl,
-						detail: res.delta,
-						title: that.data.dailyTitle,
-						time: that.data.displayValue,
-						location: that.data.curLocation,
-						subhead: that.data.subhead,
-						userId: getApp().globalData.userInfo.userId
-					}
-					saveArr.push(obj);
-					getApp().globalData.logs = saveArr
-					//把图片存到users集合表
-					const db = wx.cloud.database();
-					db.collection("logs").add({
-						data: obj,
-						success: function() {
-							wx.showToast({
-								title: '保存成功',
-								icon: 'success',
-								duration: 1500
-							})
-						},
-						fail: function() {
-							wx.showToast({
-								title: '保存失败',
-								'icon': 'none',
-								duration: 3000
-							})
-						}
-					});
-					setTimeout(function() {
-						wx.switchTab({
-							url: "../index/index",
-							success: (result) => {
-								console.log("switchTab success")
-							},
-							fail: (res) => {
-								console.log(res)
-							},
-							complete: (res) => {
-								console.log("complete")
-							},
-						})
-					}, 1800)
-					console.log("getContents success");
+				},
+				fail: function() {
+					wx.showToast({
+						title: '保存失败',
+						'icon': 'none',
+						duration: 3000
+					})
 				}
-			}
-		})
+			});
+			setTimeout(function() {
+				wx.switchTab({
+					url: "../index/index",
+					success: (result) => {
+						console.log("switchTab success")
+					},
+					fail: (res) => {
+						console.log(res)
+					},
+					complete: (res) => {
+						console.log("complete")
+					},
+				})
+			}, 1800)
+			console.log("getContents success");
+		}
 	},
+
 
 	removeFormat() {
 		this.editorCtx.removeFormat()
