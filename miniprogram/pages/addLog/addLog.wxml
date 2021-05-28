@@ -1,7 +1,7 @@
 <!-- 顶部功能按钮 -->
 <!-- <view class="toolbar" catchtouchend="format"> -->
-  <!-- <view class="toolbar" catchtouchend="format" hidden="{{keyboardHeight > 0 ? true : false}}" style="bottom: {{isIOS ? keyboardHeight : 0}}px"></view> -->
-  <!-- <i class="iconfont icon-baocun" catchtouchend="getContents"></i>
+<!-- <view class="toolbar" catchtouchend="format" hidden="{{keyboardHeight > 0 ? true : false}}" style="bottom: {{isIOS ? keyboardHeight : 0}}px"></view> -->
+<!-- <i class="iconfont icon-baocun" catchtouchend="getContents"></i>
   <i class="iconfont icon-charutupian" catchtouchend="insertImage"></i>
   <i class="iconfont icon-fengexian" catchtouchend="insertDivider"></i>
   <i class="iconfont icon-format-header-1 {{formats.header === 1 ? 'ql-active' : ''}}" data-name="header" data-value="{{1}}"></i>
@@ -48,36 +48,24 @@
     <view class="showimgUrl">
       <wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrl"></wux-cell>
     </view>
-  </view>
-
-
-  <!-- 输入文本区域 -->
-<scroll-view scroll-y="true" style="height: 520rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-  <!-- <view class="container" style="height:{{editorHeight}}px;"></view> -->
-  <!-- <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange" bindready="onEditorReady" show-img-size="true"> -->
-    <view >
-  <!-- </editor> -->
-    <richText 
-    id='richText' 
-    readOnly='{{readOnly}}'
-    placeholder='{{placeholder}}' 
-    formatDate='YY/MM/DD'
-    buttonTxt='保存'
-    bind:clearBeforeEvent='clearBeforeEvent'
-    bind:clearSuccess='clearSuccess'
-    bind:undo='undo'
-    bind:restore='restore'
-    bind:onEditorReady='onEditorReady' 
-    bind:bindfocus='bindfocus' 
-    bind:bindblur='bindblur' 
-    bind:bindinput='bindinput' 
-    bind:insertImageEvent='insertImageEvent' 
-    bind:getEditorContent='getContents'></richText>
-  </view>
-  </scroll-view>
-<view class="button">
-  <view class="preview" bindtap="preview">预览</view>
-  <view class="submit" bindtap="submit">提交</view>
 </view>
 
- 
+
+<!-- 输入文本区域 -->
+<scroll-view scroll-y="true" style="height: 520rpx;" bindscrolltoupper="upper" bindscrolltolower="lower"
+	bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+	<!-- <view class="container" style="height:{{editorHeight}}px;"></view> -->
+	<!-- <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange" bindready="onEditorReady" show-img-size="true"> -->
+	<view>
+		<!-- </editor> -->
+		<richText id='richText' readOnly='{{readOnly}}' placeholder='{{placeholder}}' formatDate='YY/MM/DD'
+			buttonTxt='保存' bind:clearBeforeEvent='clearBeforeEvent' bind:clearSuccess='clearSuccess' bind:undo='undo'
+			bind:restore='restore' bind:onEditorReady='onEditorReady' bind:bindfocus='bindfocus'
+			bind:bindblur='bindblur' bind:bindinput='bindinput' bind:insertImageEvent='insertImageEvent'
+			bind:getEditorContent='getEditorContents'></richText>
+	</view>
+</scroll-view>
+<view class="button">
+	<view class="preview" bindtap="preview">预览</view>
+	<view class="submit" bindtap="getContents">提交</view>
+</view>
