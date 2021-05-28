@@ -11,6 +11,7 @@
   <view wx:for="{{list}}" class="logDetail" bindtap="getLogDetail" >
     <card
     headerImg='../../static/image/headPartrait.jpg'
+    user = 'elina'
     title='{{item.title}}'
     time='{{item.time}}'
     img='{{item.image}}'

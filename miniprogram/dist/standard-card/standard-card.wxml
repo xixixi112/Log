@@ -4,14 +4,15 @@
     <view class='pc'>
       <image mode='aspectFill' src='{{headerImg}}'></image>
     </view>
-    <view class='title-time'>
-      <view class='title'>{{title}}</view>
+    <view class='user-time'>
+      <view class='user'>{{user}}</view>
       <view class='time'>{{time}}</view>
     </view>
     <view>
       <icon-button type='more' style='display: none;'></icon-button>
     </view>
   </view>
+  <view class='title'>{{title}}</view>
   <view class='img'>
     <image mode='aspectFill' src='{{img}}'></image>
   </view>

@@ -15,7 +15,7 @@ Page({
 		showLocation: "点击选择位置",
 		curLocation: "",
 		dailyTitle: "",
-		subhead: "",
+		abstract: "",
 		showImgUrl: "点击选择封面",
 		ImgUrl: "",
 		userInfo: getApp().globalData.userInfo
@@ -205,11 +205,11 @@ Page({
 		})
 		console.log(this.data.dailyTitle)
 	},
-	loseSubHeadBlur(e) {
+	loseAbstractBlur(e) {
 		this.setData({
-			subhead: e.detail.value
+			abstract: e.detail.value
 		})
-		console.log(this.data.subhead)
+		console.log(this.data.abstract)
 	},
 	getCurLocation(res) {
 		let _this = this
@@ -242,8 +242,8 @@ Page({
 		})
 	},
 
-	getImgUrlFace() {
-		let that = this;
+	getImgUrl() {
+    	let that = this;
 		wx.chooseImage({
 			count: 1,
 			sizeType: ['original', 'compressed'],
@@ -381,7 +381,7 @@ Page({
 				title: that.data.dailyTitle,
 				time: that.data.displayValue,
 				location: that.data.curLocation,
-				subhead: that.data.subhead,
+				abstract: that.data.abstract,
 				userId: getApp().globalData.userInfo.userId
 			}
 			saveArr.push(obj);
@@ -422,7 +422,6 @@ Page({
 			console.log("getContents success");
 		}
 	},
-
 
 	removeFormat() {
 		this.editorCtx.removeFormat()

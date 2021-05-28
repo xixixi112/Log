@@ -5,6 +5,7 @@ Component({
    */
   properties: {
     headerImg: String,
+    user: String,
     title: String,
     time: String,
     img: String,

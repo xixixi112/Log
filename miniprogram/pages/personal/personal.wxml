@@ -27,7 +27,8 @@
 	      </view> -->
 			<!-- 个性签名 -->
 			<view class="signature">
-				<input bindinput="bindKeyInput" placeholder="{{signature}}" />
+        <text>{{signature}}</text>
+				<!-- <input bindinput="bindKeyInput" placeholder="{{signature}}" /> -->
 			</view>
 		</view>
 		<!-- 粉丝数，日志数 -->
@@ -45,22 +46,17 @@
 				<text class="text">日志</text>
 			</view>
 
-			<!-- <view class="editData" bindtap="settingData">
+			<view class="editData" bindtap="settingData">
 				编辑资料
-			</view> -->
-			<!-- <view class="setting" bindtap="setting">
+			</view>
+			<view class="setting" bindtap="setting">
 				<text class="iconfont icon-shezhi"></text>
-			</view> -->
+			</view>
 		</view>
 	</view>
 
 	<!-- 底部区域 -->
 	<view class="bottom">
-		<!-- <view class="logsInfoArea">
-	      <text class="logs">日志</text>
-	      <text class="collections">收藏</text>
-	      <text class="likes">赞过</text>
-	    </view> -->
 		<!-- tab切换标签栏 -->
 		<view class="tab">
 			<block wx:for="{{styles}}" wx:key="styles">

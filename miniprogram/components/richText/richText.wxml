@@ -1,5 +1,5 @@
 <view class="whole" id="richText">
-  <view style="height:{{textTool?'200':'100'}}rpx;"></view>
+  <!-- <view style="height:{{textTool?'200':'100'}}rpx;"></view> -->
   <view class="page-body">
     <view class='wrapper'>
       <editor id="editor" class="ql-container" placeholder="{{placeholder}}" showImgSize showImgToolbar showImgResize bindstatuschange="onStatusChange" read-only="{{readOnly}}" bindready="onEditorReady" bindfocus='bindfocus' bindblur='bindblur' bindinput='bindinput'>
