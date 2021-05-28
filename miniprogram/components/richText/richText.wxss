@@ -1,9 +1,10 @@
 @import "./assets/iconfont.wxss";
 page {
+  margin-top: 3%;
   background: #f8f8f8;
 }
 .page-body{
-  padding-bottom: 50rpx;
+  padding-bottom: 40rpx;
 }
 .editor-toolbar {
   position: fixed;

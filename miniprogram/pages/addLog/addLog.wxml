@@ -32,7 +32,7 @@
     </view>
     <view class="dialyAbstract">
       <wux-cell hover-class='none'>
-        <wux-input label="文章摘要" placeholder="请输入文章摘要(20字以内)" maxlength="20" value="{{dailyTitle}}" controlled="true" bind:blur="loseDailyTitleBlur">
+        <wux-input label="文章摘要" placeholder="请输入文章摘要(20字以内)" maxlength="20" value="{{abstract}}" controlled="true" bind:blur="loseAbstractBlur">
         </wux-input>
       </wux-cell>
     </view>
@@ -44,6 +44,9 @@
    
     <view class="curLocation">
       <wux-cell title="选择位置" is-link extra="{{ showLocation }}" bind:click="getCurLocation"></wux-cell>
+    </view>
+    <view class="showimgUrl">
+      <wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrl"></wux-cell>
     </view>
     <view class="showimgUrl">
       <wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrl"></wux-cell>
@@ -72,7 +75,7 @@
     bind:bindblur='bindblur' 
     bind:bindinput='bindinput' 
     bind:insertImageEvent='insertImageEvent' 
-    bind:getEditorContent='getEditorContent'></richText>
+    bind:getEditorContent='getContents'></richText>
   </view>
   </scroll-view>
 <view class="button">

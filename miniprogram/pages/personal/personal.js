@@ -1,44 +1,60 @@
 // miniprogram/pages/personal/personal.js
 var util = require('../../utils/util.js')
-const module  = require("../../commond/tabFunction.js");
+const module = require("../../commond/tabFunction.js");
 Page({
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
-    styles:[
-      {class:'icon',text:"日志",hidden:false},
-      {class:'',text:"收藏",hidden:true},
-      {class:'',text:"赞过",hidden:true}
-    ],
-    index: 0,
-    username: '游客',
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		styles: [{
+				class: 'icon',
+				text: "日志",
+				hidden: false
+			},
+			{
+				class: '',
+				text: "收藏",
+				hidden: true
+			},
+			{
+				class: '',
+				text: "赞过",
+				hidden: true
+			}
+		],
+		index: 0,
+		username: '游客',
 		userId: null,
 		userInfo: getApp().globalData.userInfo,
 		avatar: 'https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132',
-		signature: '请输入个性签名',
+		signature: '',
 		gender: 1,
-		myLogs: []
-  },
+		myLogs: [],
+		focus: false
+	},
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    wx.setNavigationBarTitle({
-			title: '个人'  
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function(options) {
+		wx.setNavigationBarTitle({
+			title: '个人'
 		})
 		//当重新加载这个页面时，查看是否有已经登录的信息
 		let userInfo = wx.getStorageSync("userInfo");
 		this.userInfo = getApp().globalData.userInfo
 		this.username = userInfo.username
+		this.signature = userInfo.signature
+		
+		console.log(this.signature)
+		
 		if (this.username) {
-      var data = getApp().globalData.logs.filter(item=> item.userId == userInfo.userId);
-      console.log(data)
-      for(let i=0; i<data.length; i++) {
-        data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
-      }
+			var data = getApp().globalData.logs.filter(item => item.userId == userInfo.userId);
+			console.log(data)
+			for (let i = 0; i < data.length; i++) {
+				data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
+			}
 			this.setData({
 				username: userInfo.username,
 				avatar: userInfo.avatar,
@@ -64,80 +80,80 @@ Page({
 				}
 			}
 		})
-    // wx.cloud.callFunction({
-    //   name: 'getLog',
-    // }).then(res=>{
-    //   console.log('请求云函数成功', res.result.data);
-    //   var data = res.result.data;
-    //   for(let i=0; i<data.length; i++) {
-    //     data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
-    //   }
-    //   this.setData({
-    //     logList: data
-    //   })
-    // })
-    // .catch(err=>{
-    //   console.log('请求云函数失败', err);
-    // })
-  },
-  tab(evt){
-    //获取页面传过来的index参数
-    var index = evt.target.dataset.index;
-    //获取data里的styles对象数组
-    var styles = this.data.styles;
-    //调用tabFunction.js封装的tab切换方法
-    var ret = module.tabComper(styles,index);
-    //将对象设置到数据里
-    this.setData(ret);
- 
-    //实现方式二
-    // styles.map((val,key) =>{
-    //   // console.log(styles[key].class);
-    //     if(key == index){
-    //       styles[key].class = 'icon';
-    //     }else{
-    //       styles[key].class = '';
-    //     }
-    // })
- 
-    // this.setData({
-    //   index,
-    //   styles
-    //   }
-    // );
-  },
- 
-  //swiper切换时触发
-  changeTab(evt){
-        //获取页面当前的index参数
-    var index = evt.detail.current;
-        //获取data里的styles对象数
-    var styles = this.data.styles
-    //调用tabFunction.js封装的tab切换方法
-    var ret = module.tabComper(styles,index);
-    //将对象设置到数据里
-    this.setData(ret);
- 
-     //实现方式二
-    // console.log("index =>"+index2);
-    // console.log("styles => "+styles);
- 
-    // styles.map((val,key) =>{
-    //   // console.log(styles[key].class);
-    //     if(key == index2){
-    //       styles[key].class = 'icon';
-    //     }else{
-    //       styles[key].class = '';
-    //     }
-    // })
- 
-    // this.setData({
-    //   index2,
-    //   styles
-    //   }
-    // );
-  },
-  settingData() {
+		// wx.cloud.callFunction({
+		//   name: 'getLog',
+		// }).then(res=>{
+		//   console.log('请求云函数成功', res.result.data);
+		//   var data = res.result.data;
+		//   for(let i=0; i<data.length; i++) {
+		//     data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
+		//   }
+		//   this.setData({
+		//     logList: data
+		//   })
+		// })
+		// .catch(err=>{
+		//   console.log('请求云函数失败', err);
+		// })
+	},
+	tab(evt) {
+		//获取页面传过来的index参数
+		var index = evt.target.dataset.index;
+		//获取data里的styles对象数组
+		var styles = this.data.styles;
+		//调用tabFunction.js封装的tab切换方法
+		var ret = module.tabComper(styles, index);
+		//将对象设置到数据里
+		this.setData(ret);
+
+		//实现方式二
+		// styles.map((val,key) =>{
+		//   // console.log(styles[key].class);
+		//     if(key == index){
+		//       styles[key].class = 'icon';
+		//     }else{
+		//       styles[key].class = '';
+		//     }
+		// })
+
+		// this.setData({
+		//   index,
+		//   styles
+		//   }
+		// );
+	},
+
+	//swiper切换时触发
+	changeTab(evt) {
+		//获取页面当前的index参数
+		var index = evt.detail.current;
+		//获取data里的styles对象数
+		var styles = this.data.styles
+		//调用tabFunction.js封装的tab切换方法
+		var ret = module.tabComper(styles, index);
+		//将对象设置到数据里
+		this.setData(ret);
+
+		//实现方式二
+		// console.log("index =>"+index2);
+		// console.log("styles => "+styles);
+
+		// styles.map((val,key) =>{
+		//   // console.log(styles[key].class);
+		//     if(key == index2){
+		//       styles[key].class = 'icon';
+		//     }else{
+		//       styles[key].class = '';
+		//     }
+		// })
+
+		// this.setData({
+		//   index2,
+		//   styles
+		//   }
+		// );
+	},
+	settingData() {
 		wx.navigateTo({
 			url: '/pages/editData/editData',
 			success: (result) => {},
@@ -145,7 +161,7 @@ Page({
 			complete: (res) => {},
 		})
 	},
-	
+
 	setting() {
 		wx.navigateTo({
 			url: '/pages/setting/setting',
@@ -155,25 +171,54 @@ Page({
 			complete: (res) => {},
 		})
 	},
-	
+
+	bindKeyInput: function(e) {
+		this.setData({
+			signature: e.detail.value
+		})
+		const db = wx.cloud.database()
+		const _ = db.command
+		//查找数据库
+		db.collection('users').where({
+			_openid: this.userInfo._openid
+		}).get({
+			success(res) {
+				console.log(res.data[0]._id)
+				let _id = res.data[0]._id
+				db.collection('users').doc(_id).update({
+					data: {
+						signature: _.set(e.detail.value)
+					},
+					success: function(res) {
+						getApp().globalData.userInfo.signature = e.detail.value
+						wx.setStorageSync('userInfo', getApp().globalData.userInfo)
+					},
+					fail: err => {
+						console.error('[数据库] [更新记录] 失败：', err)
+					}
+				})
+			}
+		})
+	},
+
 	getMyLogs() {
 		let logs = getApp().globalData.logs
 		let userId = this.userInfo.userId
-    console.log(userId)
-    var data = logs.filter(item=> item.userId == userId);
-    for(let i=0; i<data.length; i++) {
-      data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
-    }
+		console.log(userId)
+		var data = logs.filter(item => item.userId == userId);
+		for (let i = 0; i < data.length; i++) {
+			data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
+		}
 		this.myLogs = data
 		console.log(this.myLogs)
 	},
-	
-	
+
+
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
 	onReady: function() {
-    
+
 	},
 
 	/**

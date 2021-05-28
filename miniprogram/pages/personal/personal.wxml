@@ -1,36 +1,37 @@
 <!--miniprogram/pages/personal/personal.wxml-->
 <view class="container">
-  <!-- 顶部区域 -->
-  <view class="top">
-    <!-- 个人信息 -->
-    <view class="personInfoArea">
-      <!-- 头像 -->
-      <view class="headPortrait">
-        <image src="{{avatar}}"></image>
-      </view>
-      <!-- 昵称 -->
-      <view class="name">
-        {{username}}
-      </view>
-     
-      <!-- 日志ID -->
-      <view class="LogID">
-        {{userId}}
-      </view>
-      
-      <!-- 其他
-      <view class="other">
-        <text class="iconfont icon-trophy"></text>
-        哈哈哈
-        <text class="iconfont icon-guanbi1"></text>
-      </view> -->
-      <!-- 个性签名 -->
-      <view class="signature">
-        {{signature}}
-      </view>
-      
-    </view>
-    	<!-- 粉丝数，日志数 -->
+	<!-- 顶部区域 -->
+	<view class="top">
+		<!-- 个人信息 -->
+		<view class="personInfoArea">
+			<!-- 头像 -->
+			<!-- <button open-type="getUserInfo" bindgetuserinfo="getUserInfoHandler">微信登录</button> -->
+			<view class="headPortrait">
+				<image src="{{avatar}}"></image>
+			</view>
+			<!-- 昵称 -->
+			<view class="name">
+				<text>{{username}}</text>
+			</view>
+
+			<!-- 日志ID -->
+			<view class="LogID">
+				<text>小日志ID：{{userId}}</text>
+			</view>
+
+			<!-- 其他
+	      <view class="other">
+	        <text class="iconfont icon-trophy"></text>
+	        哈哈哈
+	        <text class="iconfont icon-guanbi1"></text>
+	      </view> -->
+			<!-- 个性签名 -->
+			<view class="signature">
+        <text>{{signature}}</text>
+				<!-- <input bindinput="bindKeyInput" placeholder="{{signature}}" /> -->
+			</view>
+		</view>
+		<!-- 粉丝数，日志数 -->
 		<view class="mutualInformation">
 			<view class="attention">
 				<text class="number">667</text>
@@ -52,46 +53,33 @@
 				<text class="iconfont icon-shezhi"></text>
 			</view>
 		</view>
+	</view>
 
-  </view>
-   
-  <!-- 底部区域 -->
-  <view class="bottom">
-    <!-- <view class="logsInfoArea">
-      <text class="logs">日志</text>
-      <text class="collections">收藏</text>
-      <text class="likes">赞过</text>
-    </view> -->
-    <!-- tab切换标签栏 -->
-    <view class="tab">
-        <block wx:for="{{styles}}" wx:key="styles">
-                <view class="{{item.class}}" bind:tap="tab" data-index="{{index}}">{{item.text}}</view>
-        </block>
-    </view>
-    <!-- 分割线 -->
-    <view class="divLine"> </view>
-    <!-- swiper滑动展示内容 -->
-    <swiper class="context" circular="{{true}}" current="{{index}}" bind:change="changeTab">
-        <swiper-item >
-          <scroll-view scroll-y="true" style="height: 900rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-          <view wx:for="{{myLogs}}" class="logDetail" bindtap="getLogDetail" >
-            <title-card
-              img='{{item.image}}'
-              title='{{item.title}}'
-              context='{{item.abstract}}'
-              isShowBtns='{{true}}'
-              isLiked='{{false}}'
-              likeNumber='{{30}}'
-              isShowLike='{{true}}'
-              bind:like='handleLike'>
-            </title-card>
-          </view>
-        </scroll-view>
-        </swiper-item>
-        <swiper-item >内容222</swiper-item>
-        <swiper-item >内容333</swiper-item>
-    </swiper>
-  </view>
+	<!-- 底部区域 -->
+	<view class="bottom">
+		<!-- tab切换标签栏 -->
+		<view class="tab">
+			<block wx:for="{{styles}}" wx:key="styles">
+				<view class="{{item.class}}" bind:tap="tab" data-index="{{index}}">{{item.text}}</view>
+			</block>
+		</view>
+		<!-- 分割线 -->
+		<view class="divLine"> </view>
+		<!-- swiper滑动展示内容 -->
+		<swiper class="context" circular="{{true}}" current="{{index}}" bind:change="changeTab">
+			<swiper-item>
+				<scroll-view scroll-y="true" style="height: 900rpx;" bindscrolltoupper="upper" bindscrolltolower="lower"
+					bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+					<view wx:for="{{myLogs}}" class="logDetail" bindtap="getLogDetail">
+						<title-card img='{{item.image}}' title='{{item.title}}' context='{{item.abstract}}'
+							isShowBtns='{{true}}' isLiked='{{false}}' likeNumber='{{30}}' isShowLike='{{true}}'
+							bind:like='handleLike'>
+						</title-card>
+					</view>
+				</scroll-view>
+			</swiper-item>
+			<swiper-item>内容222</swiper-item>
+			<swiper-item>内容333</swiper-item>
+		</swiper>
+	</view>
 </view>
-
-			
