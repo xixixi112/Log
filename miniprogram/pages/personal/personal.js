@@ -9,17 +9,17 @@ Page({
 	data: {
 		styles: [{
 				class: 'icon',
-				text: "日志",
+				text: "公开",
 				hidden: false
 			},
 			{
 				class: '',
-				text: "收藏",
+				text: "私密",
 				hidden: true
 			},
 			{
 				class: '',
-				text: "赞过",
+				text: "收藏",
 				hidden: true
 			}
 		],
@@ -30,7 +30,9 @@ Page({
 		avatar: 'https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132',
 		signature: '',
 		gender: 1,
-		myLogs: [],
+    publicLogs: [],
+    privateLogs:[],
+    collectionLogs:[],
 		focus: false
 	},
 
@@ -51,17 +53,19 @@ Page({
 		
 		if (this.username) {
 			var data = getApp().globalData.logs.filter(item => item.userId == userInfo.userId);
-			console.log(data)
 			for (let i = 0; i < data.length; i++) {
 				data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
-			}
+      }
+      var data1 = data.filter(item => item.public == true);
+      var data2 = data.filter(item => item.public == false);
 			this.setData({
 				username: userInfo.username,
 				avatar: userInfo.avatar,
 				signature: userInfo.signature,
 				gender: userInfo.gender,
 				userId: userInfo.userId,
-				myLogs: data
+        publicLogs: data1,
+        privateLogs: data2,
 			})
 		}
 		console.log("logs: " + JSON.stringify(getApp().globalData.logs))
@@ -201,16 +205,30 @@ Page({
 		})
 	},
 
-	getMyLogs() {
+	getPublicLogs() {
 		let logs = getApp().globalData.logs
 		let userId = this.userInfo.userId
 		console.log(userId)
-		var data = logs.filter(item => item.userId == userId);
-		for (let i = 0; i < data.length; i++) {
-			data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
+    var data1 = logs.filter(item => item.userId == userId);
+    var data2 = data1.filter(item => item.public == true);
+		for (let i = 0; i < data2.length; i++) {
+			data2[i]["time"] = util.formatTime(new Date(data2[i]["time"]))
 		}
-		this.myLogs = data
-		console.log(this.myLogs)
+		this.publicLogs = data2
+		console.log(this.publicLogs)
+  },
+  
+  getPrivateLogs() {
+		let logs = getApp().globalData.logs
+		let userId = this.userInfo.userId
+		console.log(userId)
+    var data1 = logs.filter(item => item.userId == userId);
+    var data2 = data1.filter(item => item.public == false);
+		for (let i = 0; i < data2.length; i++) {
+			data2[i]["time"] = util.formatTime(new Date(data2[i]["time"]))
+		}
+		this.privateLogs = data2
+		console.log(this.privateLogs)
 	},
 
 
@@ -227,7 +245,8 @@ Page({
 	onShow: function() {
 		this.userInfo = getApp().globalData.userInfo
 		this.userId = this.userInfo.userId
-		this.getMyLogs()
+    this.getPublicLogs()
+    this.getPrivateLogs()
 	},
 
 	/**

@@ -36,17 +36,14 @@
         </wux-input>
       </wux-cell>
     </view>
-    <view class="selectData">
-      <wux-date-picker mode="datetime" value="{{ curTime }}" maxDate="{{maxDate}}" bind:confirm="onChooseData">
-        <wux-cell title="选择日期" is-link extra="{{ displayValue }}"></wux-cell>
-      </wux-date-picker>
-    </view>
-   
-    <view class="curLocation">
-      <wux-cell title="选择位置" is-link extra="{{ showLocation }}" bind:click="getCurLocation"></wux-cell>
-    </view>
     <view class="showimgUrl">
       <wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrl"></wux-cell>
+    </view>
+
+    <view >
+      <wux-cell hover-class='none' style="color: grey"  bindtap="radioChange">
+        <radio class="showPrivate" checked="{{checked}}"  />仅自己可见
+      </wux-cell>
     </view>
     <view class="showimgUrl">
       <wux-cell title="选择封面" is-link extra="{{ showImgUrl }}" bind:click="getImgUrl"></wux-cell>

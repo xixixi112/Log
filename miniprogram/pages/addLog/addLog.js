@@ -8,17 +8,15 @@ Page({
 		placeholder: '开始输入...',
 		editorHeight: 300,
 		keyboardHeight: 0,
-		isIOS: false,
-		curTime: "",
+    isIOS: false,
+    public:true,
 		maxDate: "",
-		displayValue: "点击选择日期",
-		showLocation: "点击选择位置",
-		curLocation: "",
 		dailyTitle: "",
 		abstract: "",
 		showImgUrl: "点击选择封面",
 		ImgUrl: "",
-		userInfo: getApp().globalData.userInfo
+    userInfo: getApp().globalData.userInfo,
+    checked:false
 	},
 	onShow: function() {
 
@@ -191,14 +189,7 @@ Page({
 
 		})
 	},
-	onChooseData(e) {
-		console.log(e);
-		this.setData({
-			displayValue: e.detail.label,
-			curTime: e.detail.label
-		})
-		console.log(this.data.displayValue)
-	},
+	
 	loseDailyTitleBlur(e) {
 		this.setData({
 			dailyTitle: e.detail.value
@@ -241,7 +232,12 @@ Page({
 			}
 		})
 	},
-
+  radioChange() {
+    this.setData({
+      checked :!this.data.checked
+    })
+    console.log(this.data.checked)
+  },
 	getImgUrl() {
     let that = this;
 		wx.chooseImage({
@@ -368,8 +364,7 @@ Page({
 		this.editorCtx.getContents({
 			success: function(res) {
 				console.log(res)
-				if (that.data.dailyTitle === "" || that.data.abstract === "" || that.data.displayValue === "点击选择日期" || that.data
-					.curLocation === "" || that.data.ImgUrl === "") {
+				if (that.data.dailyTitle === "" || that.data.abstract === "" || that.data.ImgUrl === "") {
 					wx.showToast({
 						title: '请填写必要信息',
 						icon: 'error',
@@ -377,16 +372,18 @@ Page({
 					})
 				} else {
 					var saveArr = getApp().globalData.logs;
-					console.log('userId: ' + getApp().globalData.userInfo.userId)
+          console.log('userId: ' + getApp().globalData.userInfo.userId)
+          var curtime = util.formatTime(new Date());
 					let obj = {
 						image: that.data.ImgUrl,
 						detail: res.delta,
 						title: that.data.dailyTitle,
-						time: that.data.displayValue,
-						location: that.data.curLocation,
+						time: curtime,
             abstract: that.data.abstract,
-						userId: getApp().globalData.userInfo.userId
-					}
+            userId: getApp().globalData.userInfo.userId,
+            public: !that.data.checked
+          }
+          console.log(obj);
 					saveArr.push(obj);
 					getApp().globalData.logs = saveArr
 					//把图片存到users集合表

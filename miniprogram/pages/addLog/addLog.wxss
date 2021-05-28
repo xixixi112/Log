@@ -72,7 +72,7 @@
   height: 70rpx;
   line-height: 72rpx;
   margin-left: 1%;
-  margin-top: 10%;
+  margin-top: 7%;
   text-align: center;
   font-size:26rpx;
   color: #ffffff;
@@ -85,7 +85,7 @@
   height: 70rpx;
   line-height: 72rpx;
   margin-left: 10%;
-  margin-top: 10%;
+  margin-top: 7%;
   text-align: center;
   font-size:26rpx;
   color: #ffffff;
@@ -94,4 +94,8 @@
 
 .button{
   display:flex;justify-content:space-around;
+}
+
+.showPrivate{
+  margin-left: 58%;
 }

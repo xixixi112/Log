@@ -70,7 +70,7 @@
 			<swiper-item>
 				<scroll-view scroll-y="true" style="height: 900rpx;" bindscrolltoupper="upper" bindscrolltolower="lower"
 					bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-					<view wx:for="{{myLogs}}" class="logDetail" bindtap="getLogDetail">
+					<view wx:for="{{publicLogs}}" class="logDetail" bindtap="getLogDetail">
 						<title-card img='{{item.image}}' title='{{item.title}}' context='{{item.abstract}}'
 							isShowBtns='{{true}}' isLiked='{{false}}' likeNumber='{{30}}' isShowLike='{{true}}'
 							bind:like='handleLike'>
@@ -78,7 +78,17 @@
 					</view>
 				</scroll-view>
 			</swiper-item>
-			<swiper-item>内容222</swiper-item>
+			<swiper-item>
+        <scroll-view scroll-y="true" style="height: 900rpx;" bindscrolltoupper="upper" bindscrolltolower="lower"
+					bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+					<view wx:for="{{privateLogs}}" class="logDetail" bindtap="getLogDetail">
+						<title-card img='{{item.image}}' title='{{item.title}}' context='{{item.abstract}}'
+							isShowBtns='{{true}}' isLiked='{{false}}' likeNumber='{{30}}' isShowLike='{{true}}'
+							bind:like='handleLike'>
+						</title-card>
+					</view>
+				</scroll-view>
+      </swiper-item>
 			<swiper-item>内容333</swiper-item>
 		</swiper>
 	</view>
