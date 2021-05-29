@@ -1,5 +1,6 @@
 // miniprogram/pages/logDetail/logDetail.js
 var WxParse = require("../../wxParse/wxParse.js")
+var app = getApp();
 Page({
 
 	/**
@@ -7,26 +8,43 @@ Page({
 	 */
 	data: {
 		LogTitle: "",
-		LogContext: ""
+		LogContext: "",
+		log:{}
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
-		var that = this
-		console.log(options)
-		wx.getStorage({
-			key: options.curTime,
-			success: (result) => {
-				console.log(result)
-				WxParse.wxParse("article", "html", result.data[4], that, 0)
-				this.setData({
-					LogTitle: result.data[0],
-					LogContext: result.data[4]
-				})
-			}
+	
+		console.log(options.id)
+		var data = getApp().globalData.logs.filter(item => item._id == options.id);
+		
+		console.log(data)
+		this.setData({
+			log: data[0]
 		})
+		// wx.cloud.database().collection('logs').where({_id:options.id}).get()
+		// .then(res=>{//请求成功
+		// 	console.log( res.result.data)
+		// 	this.setData({
+		// 		log: res.result.data
+		// 	})
+		// })
+		// .catch(res=>{//请求失败
+		// 	console.log("failed")
+		// })
+		// .getStorage({
+		// 	key: options.curTime,
+		// 	success: (result) => {
+		// 		console.log(result)
+		// 		WxParse.wxParse("article", "html", result.data[4], that, 0)
+		// 		this.setData({
+		// 			LogTitle: result.data[0],
+		// 			LogContext: result.data[4]
+		// 		})
+		// 	}
+		// })
 
 	},
 	
@@ -70,6 +88,20 @@ Page({
 	onShow: function() {
 
 	},
+	onEditorReady() {
+		// richText = this.selectComponent('#show'); //获取组件实例
+    wx.createSelectorQuery().select('#editor').context(res => {
+			app.globalData.data.richTextContents = this.data.log.detail;
+      this.editorCtx = res.context;
+      console.log(app.globalData.data.richTextContents)
+      this.editorCtx.setContents({
+        html: app.globalData.data.richTextContents,
+        success: res => {
+          console.log('[setContents success]')
+        }
+      })
+    }).exec()
+  },
 
 	/**
 	 * 生命周期函数--监听页面隐藏

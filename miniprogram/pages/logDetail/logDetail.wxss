@@ -1,7 +1,60 @@
 /* miniprogram/pages/logDetail/logDetail.wxss */
 @import "../../wxParse/wxParse.wxss";
-.LogTitle{
-  font-size: 48rpx;
-  text-align: center;
-  
+.title{
+  margin-top: 3%;
+  font-size: 45rpx;
+  margin-left:5%;
+  /* text-align: center; */
+  /* color:darkslategray; */
 }
+
+.time{
+  margin-top: 2%;
+  font-size: 30rpx;
+  color:dimgray;
+  margin-left:5%;
+}
+
+.name{
+  margin-left: 3%;
+}
+
+.img{
+  width: 100%;
+  height: 300rpx;
+}
+.card{
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-left: 8%;
+  margin-right: 8%;
+  text-align: center;
+  background-color: white;
+  border-radius: 18rpx;
+  width: 84%;
+  height: 380rpx;
+}
+
+.abs{
+  font-size: 33rpx;
+  text-align: center;
+  color:darkslategrey;
+  margin-bottom: 3%;
+}
+
+.context{
+  color:darkslategrey;
+  background-color: white;
+  margin-top: 3%;
+  min-height: 600rpx;
+  margin-left: 5%;
+  margin-right: 5%;
+  border-radius: 18rpx;
+}
+
+.divLine{
+  background: darkslategrey;
+  width: 100%;
+  height: 1rpx;
+}
+.page{background-color:var(--weui-BG-2)}image{margin:4px 0}

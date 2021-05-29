@@ -13,7 +13,7 @@
     </view>
   </view>
   <view class='title'>{{title}}</view>
-  <view class='img'>
+  <view class='img' bindtap='handleDetail'>
     <image mode='aspectFill' src='{{img}}'></image>
   </view>
   <view class='text'>

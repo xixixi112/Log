@@ -39,6 +39,7 @@ Page({
 				data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
 			}
 			getApp().globalData.logs = data
+			console.log(getApp().globalData.logs)
 			var data1 = data.filter(item => item.public == true);
 			this.setData({
 				list: data1,
@@ -134,6 +135,13 @@ Page({
 			success: (res) => {
 				console.log("携带数据跳转成功");
 			}
+		})
+	},
+	handleDetail(e){
+		let item = e.currentTarget.dataset.id
+		console.log(item)
+		wx.navigateTo({
+			url:'/pages/logDetail/logDetail?id='+item,
 		})
 	},
 	handleLike(e) {

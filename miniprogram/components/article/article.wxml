@@ -1,33 +1,11 @@
-<!--miniprogram/pages/logDetail/logDetail.wxml-->
-<import src="../../wxParse/wxParse.wxml"></import>
-<!-- <view> -->
-<!-- 标题 -->
-<!-- <view class="LogTitle">{{LogTitle}}</view> -->
-
-<!-- 文本区域 -->
-<!-- <view>
-<template is="wxParse" data="{{wxParseData:article.nodes}}"/>
-</view> -->
-<!-- </view> --> 
 <view class="page" data-weui-theme="{{theme}}">
-    <view class="hd">
-        <view class="title">{{log.title}}</view>
-        <view class="time">
-          <text>{{log.time}}</text>
-          <text class="name">{{log.username}}</text>
-        </view>
-        <view class="card">
-          <image class="img" mode='aspectFill' src='{{log.image}}'></image>
-          <view class="abs">{{log.abstract}}</view>
-        </view>
+    <view class="page__hd">
+        <view class="page__title">Article</view>
+        <view class="page__desc">文章</view>
     </view>
-    <!-- 分割线 -->
-		<!-- <view class="divLine"> </view> -->
-    <divider text="文章正文"> </divider>
-    <view class="context">
-         <!-- {{log.detail}} -->
-         <editor id="editor" class="" read-only bindready="onEditorReady"></editor>
-            <!-- <view class="weui-article__h1">大标题</view>
+    <view class="page__bd">
+        <view class="weui-article">
+            <view class="weui-article__h1">大标题</view>
             <view class="weui-article__section">
                 <view class="weui-article__h2">章标题</view>
                 <view class="weui-article__section">
@@ -52,8 +30,7 @@
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </view>
                 </view>
-            </view> -->
-     
+            </view>
+        </view>
     </view>
 </view>
-

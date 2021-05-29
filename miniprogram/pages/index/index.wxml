@@ -7,7 +7,6 @@
 
 
 <!-- 日志列表 -->
-  <view class="logshowArea">
   <view wx:for="{{list}}" wx:for-index="index" wx:key="index" class="logDetail">
 	  <!-- bindtap="getLogDetail" -->
     <card 
@@ -31,7 +30,8 @@
     isShowDelete='{{false}}'
     bind:like="handleLike"
     bind:unlike='handleUnlike'
-    bind:delete='handleDelete'></card>
+    bind:detail='handleDetail'
+    bind:delete='handleDelete' data-id="{{item._id}}" ></card>
 
     <!-- <title-card
     img='{{item.image}}'
@@ -72,6 +72,6 @@
       北京
     </view>
   </view> -->
-</view>
+
 
 

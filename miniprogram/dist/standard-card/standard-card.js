@@ -60,8 +60,14 @@ Component({
       this.triggerEvent('unlike', {isUnliked: this.data.isUnliked});
     },
 
+    handleDetail(){
+      this.triggerEvent('detail');
+      console.log("detail")
+    },
+
     handleDelete() {
       this.triggerEvent('delete');
+      console.log("detele")
     }
 
     // ignore the function since the share button be hidden
