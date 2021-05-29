@@ -70,10 +70,10 @@
 			<swiper-item>
 				<scroll-view scroll-y="true" style="height: 900rpx;" bindscrolltoupper="upper" bindscrolltolower="lower"
 					bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-					<view wx:for="{{publicLogs}}" class="logDetail" bindtap="getLogDetail">
+					<view wx:for="{{publicLogs}}" class="logDetail"  >
 						<title-card img='{{item.image}}' title='{{item.title}}' context='{{item.abstract}}'
 							isShowBtns='{{true}}' isLiked='{{false}}' likeNumber='{{item.like}}' isShowLike='{{true}}'
-							bind:like='handleLike'>
+							bind:like='handleLike' bindtap="getLogDetail" data-id="{{item._id}}">
 						</title-card>
 					</view>
 				</scroll-view>
@@ -84,7 +84,7 @@
 					<view wx:for="{{privateLogs}}" class="logDetail" bindtap="getLogDetail">
 						<title-card img='{{item.image}}' title='{{item.title}}' context='{{item.abstract}}'
 							isShowBtns='{{true}}' isLiked='{{false}}' likeNumber='{{item.like}}' isShowLike='{{true}}'
-							bind:like='handleLike'>
+							bind:like='handleLike' bindtap="getLogDetail" data-id="{{item._id}}">
 						</title-card>
 					</view>
 				</scroll-view>
@@ -95,7 +95,7 @@
 					<view wx:for="{{favoriteLogs}}" class="logDetail" bindtap="getLogDetail">
 						<title-card img='{{item.image}}' title='{{item.title}}' context='{{item.abstract}}'
 							isShowBtns='{{true}}' isLiked='{{false}}' likeNumber='{{item.like}}' isShowLike='{{true}}'
-							bind:like='handleLike'>
+							bind:like='handleLike' bindtap="getLogDetail" data-id="{{item._id}}">
 						</title-card>
 					</view>
 				</scroll-view>

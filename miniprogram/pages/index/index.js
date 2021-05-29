@@ -38,8 +38,6 @@ Page({
 			for (let i = 0; i < data.length; i++) {
 				data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
 			}
-			getApp().globalData.logs = data
-			console.log(getApp().globalData.logs)
 			var data1 = data.filter(item => item.public == true);
 			this.setData({
 				list: data1,
@@ -48,6 +46,7 @@ Page({
 		}).catch(err => {
 			console.log('请求云函数失败', err);
 		})
+
 		
 		//console.log({list});
 		// wx.getStorage({

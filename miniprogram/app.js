@@ -58,6 +58,8 @@ App({
 			},
 			logs: [],
 			publiclogs:[],
+			myPrivate:[],
+			myPublic:[],
 			data: {},
 			favoriteLogs: []
 		}
