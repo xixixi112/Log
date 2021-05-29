@@ -25,7 +25,6 @@
 }
 .card{
   margin-top: 2%;
-  margin-bottom: 2%;
   margin-left: 8%;
   margin-right: 8%;
   text-align: center;
@@ -42,14 +41,20 @@
   margin-bottom: 3%;
 }
 
-.context{
-  color:darkslategrey;
+.bottom{
   background-color: white;
   margin-top: 3%;
   min-height: 600rpx;
   margin-left: 5%;
   margin-right: 5%;
-  border-radius: 18rpx;
+  border-radius: 20rpx;
+}
+
+.context{
+  color:darkslategrey;
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .divLine{

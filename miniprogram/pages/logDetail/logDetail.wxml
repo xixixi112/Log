@@ -24,6 +24,7 @@
     <!-- 分割线 -->
 		<!-- <view class="divLine"> </view> -->
     <divider text="文章正文"> </divider>
+    <view class="bottom">
     <view class="context">
          <!-- {{log.detail}} -->
          <editor id="editor" class="" read-only bindready="onEditorReady"></editor>
@@ -55,5 +56,6 @@
             </view> -->
      
     </view>
+  </view>
 </view>
 
