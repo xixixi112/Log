@@ -30,10 +30,10 @@ Page({
 		avatar: 'https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132',
 		signature: '',
 		gender: 1,
-    publicLogs: [],
-    privateLogs:[],
-    collectionLogs:[],
-		focus: false
+		publicLogs: [],
+		privateLogs: [],
+		focus: false,
+		favoriteLogs: []
 	},
 
 	/**
@@ -48,27 +48,26 @@ Page({
 		this.userInfo = getApp().globalData.userInfo
 		this.username = userInfo.username
 		this.signature = userInfo.signature
-		
-		console.log(this.signature)
-		
+
 		if (this.username) {
 			var data = getApp().globalData.logs.filter(item => item.userId == userInfo.userId);
 			for (let i = 0; i < data.length; i++) {
 				data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
-      }
-      var data1 = data.filter(item => item.public == true);
-      var data2 = data.filter(item => item.public == false);
+			}
+			var data1 = data.filter(item => item.public == true);
+			var data2 = data.filter(item => item.public == false);
 			this.setData({
 				username: userInfo.username,
 				avatar: userInfo.avatar,
 				signature: userInfo.signature,
 				gender: userInfo.gender,
 				userId: userInfo.userId,
-        publicLogs: data1,
-        privateLogs: data2,
+				publicLogs: data1,
+				privateLogs: data2,
+				favoriteLogs: getApp().globalData.favoriteLogs
 			})
 		}
-		console.log("logs: " + JSON.stringify(getApp().globalData.logs))
+
 		wx.getSetting({
 			success: res => {
 				if (res.authSetting['scope.userInfo']) {
@@ -209,21 +208,21 @@ Page({
 		let logs = getApp().globalData.logs
 		let userId = this.userInfo.userId
 		console.log(userId)
-    var data1 = logs.filter(item => item.userId == userId);
-    var data2 = data1.filter(item => item.public == true);
+		var data1 = logs.filter(item => item.userId == userId);
+		var data2 = data1.filter(item => item.public == true);
 		for (let i = 0; i < data2.length; i++) {
 			data2[i]["time"] = util.formatTime(new Date(data2[i]["time"]))
 		}
 		this.publicLogs = data2
 		console.log(this.publicLogs)
-  },
-  
-  getPrivateLogs() {
+	},
+
+	getPrivateLogs() {
 		let logs = getApp().globalData.logs
 		let userId = this.userInfo.userId
 		console.log(userId)
-    var data1 = logs.filter(item => item.userId == userId);
-    var data2 = data1.filter(item => item.public == false);
+		var data1 = logs.filter(item => item.userId == userId);
+		var data2 = data1.filter(item => item.public == false);
 		for (let i = 0; i < data2.length; i++) {
 			data2[i]["time"] = util.formatTime(new Date(data2[i]["time"]))
 		}
@@ -231,6 +230,21 @@ Page({
 		console.log(this.privateLogs)
 	},
 
+	// getMyFavoritesLogs() {
+	// 	favoriteLogs
+	// 	const db = wx.cloud.database()
+	// 	const _ = db.command
+	// 	//查找数据库
+	// 	db.collection('favorites').where({
+	// 		userId: this.userId
+	// 	}).get({
+	// 		success(res) {
+	// 			console.log(res)
+	// 			getApp().globalData.favoriteLogs = res.data
+	// 		}
+	// 	})
+
+	// },
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
@@ -245,8 +259,8 @@ Page({
 	onShow: function() {
 		this.userInfo = getApp().globalData.userInfo
 		this.userId = this.userInfo.userId
-    this.getPublicLogs()
-    this.getPrivateLogs()
+		this.getPublicLogs()
+		this.getPrivateLogs()
 	},
 
 	/**

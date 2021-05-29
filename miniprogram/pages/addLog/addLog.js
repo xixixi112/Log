@@ -8,15 +8,15 @@ Page({
 		placeholder: '开始输入...',
 		editorHeight: 300,
 		keyboardHeight: 0,
-    isIOS: false,
-    public:true,
+		isIOS: false,
+		public:true,
 		maxDate: "",
 		dailyTitle: "",
 		abstract: "",
 		showImgUrl: "点击选择封面",
 		ImgUrl: "",
-    userInfo: getApp().globalData.userInfo,
-    checked:false
+		userInfo: getApp().globalData.userInfo,
+		checked:false
 	},
 	onShow: function() {
 
@@ -189,7 +189,7 @@ Page({
 
 		})
 	},
-	
+
 	loseDailyTitleBlur(e) {
 		this.setData({
 			dailyTitle: e.detail.value
@@ -360,8 +360,8 @@ Page({
 
 	getContents() {
 		// 存储数据
-    var that = this;
-    console.log(that.data);
+		var that = this;
+		console.log(that.data);
 		if (that.data.dailyTitle === "" || that.data.abstract === "" || that.data.ImgUrl === "") {
 			wx.showToast({
 				title: '请填写必要信息',
@@ -372,29 +372,28 @@ Page({
 			var saveArr = getApp().globalData.logs;
 			console.log('userId: ' + getApp().globalData.userInfo.userId)
 			var curtime = util.formatTime(new Date());
-      let obj = {
-        image: that.data.ImgUrl,
-        detail: app.globalData.data.richTextContents,
-        title: that.data.dailyTitle,
-        time: curtime,
-        abstract: that.data.abstract,
-        userId: getApp().globalData.userInfo.userId,
-        public: !that.data.checked
-      }
-			saveArr.push(obj);
-			console.log(saveArr)
-			getApp().globalData.logs = saveArr
-			console.log(getApp().globalData.logs)
+		  let obj = {
+			image: that.data.ImgUrl,
+			detail: app.globalData.data.richTextContents,
+			title: that.data.dailyTitle,
+			time: curtime,
+			abstract: that.data.abstract,
+			userId: getApp().globalData.userInfo.userId,
+			public: !that.data.checked
+		  }
 			//把图片存到users集合表
 			const db = wx.cloud.database();
 			db.collection("logs").add({
 				data: obj,
-				success: function() {
+				success: function(res) {
+					obj._id = res.data[0]._id
+					saveArr.push(obj);
+					getApp().globalData.logs = saveArr
 					wx.showToast({
 						title: '保存成功',
 						icon: 'success',
 						duration: 1500
-					})		
+					})
 				},
 				fail: function() {
 					wx.showToast({
@@ -403,8 +402,7 @@ Page({
 						duration: 3000
 					})
 				}
-      });
-    
+			});
 			setTimeout(function() {
 				wx.switchTab({
 					url: "../index/index",
@@ -421,7 +419,7 @@ Page({
 			}, 1800)
 			console.log("getContents success");
 		}
-  },
+	},
 
 
 	removeFormat() {
@@ -452,5 +450,5 @@ Page({
 				})
 			}
 		})
-  }
+	}
 })

@@ -24,6 +24,7 @@ Page({
 		this.username = userInfo.username
 		if (this.username) {
 			getApp().globalData.userInfo = userInfo
+			this.getMyFavoritesLogs(userInfo._openid)
 		}
 		     
 		wx.getSetting({
@@ -134,7 +135,30 @@ Page({
 		return userId;
 	},
 	
-
+	getMyFavoritesLogs(userId) {
+		const db = wx.cloud.database()
+		const _ = db.command
+		//查找数据库
+		db.collection('favorites').where({
+			userId: userId
+		}).get({
+			success(res) {
+				console.log(res)
+				let arr = []
+				for (let i = 0; i < res.data.length; i++) {
+					db.collection('logs').where({
+						_id: res.data[i]._id
+					}).get({
+						success(res) {
+							arr.push(res.data[0])
+						}
+					})
+				}
+				getApp().globalData.favoriteLogs = arr
+			}
+		})
+	},
+	
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

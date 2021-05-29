@@ -8,8 +8,9 @@
 
 <!-- 日志列表 -->
   <view class="logshowArea">
-  <view wx:for="{{list}}" class="logDetail" >
-    <card
+  <view wx:for="{{list}}" wx:for-index="index" wx:key="index" class="logDetail">
+	  <!-- bindtap="getLogDetail" -->
+    <card 
     headerImg='{{item.avatar}}'
     user = '{{item.username}}'
     title='{{item.title}}'
@@ -24,13 +25,13 @@
     likeNumber='{{item.like}}'
     isShowUnlike="{{true}}"
     isUnLiked="{{false}}"
-    unlikeNumber='{{2}}'
+	data-item="{{item}}" 
+	data-index = "{{index}}"
+    unlikeNumber='{{10}}'
     isShowDelete='{{false}}'
-    bind:like='handleLike'
+    bind:like="handleLike"
     bind:unlike='handleUnlike'
-    bind:delete='handleDelete'
-    bind:getDetail='{{handleDetail}}'>
-    </card>
+    bind:delete='handleDelete'></card>
 
     <!-- <title-card
     img='{{item.image}}'
