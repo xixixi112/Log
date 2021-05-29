@@ -59,7 +59,8 @@ App({
 			logs: [],
 			publiclogs:[],
 			data: {},
-			favoriteLogs: []
+			favoriteLogs: [],
+			allFavoriteLogs: []
 		}
 		
 		let userInfo = wx.getStorageSync("userInfo")

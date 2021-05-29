@@ -26,30 +26,92 @@ Page({
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function(options) {
+		let that = this
 		getApp().globalData.userInfo = wx.getStorageSync("userInfo")
 		let userInfo = getApp().globalData.userInfo
 		console.log(userInfo.userId)
-		this.getMyFavoritesLogs(userInfo.userId)
 		wx.cloud.callFunction({
 			name: 'getPublicLogs',
 		}).then(res => {
 			console.log('请求云函数成功', res.result.list);
 			var data = res.result.list;
-			data.sort(this.compare('time'));
-			for (let i = 0; i < data.length; i++) {
-				data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
-			}
-			getApp().globalData.logs = data
-			console.log(getApp().globalData.logs)
-			var data1 = data.filter(item => item.public == true);
-			this.setData({
-				list: data1,
+			data.sort(that.compare('time'));
+			const db = wx.cloud.database()
+			const _ = db.command
+			//查找数据库
+			db.collection('favorites').where({
+				userId: userInfo.userId
+			}).get({
+				success(res) {
+					console.log("我收藏的")
+					console.log(res)
+					getApp().globalData.allFavoriteLogs = res.data
+					// getApp().globalData.favoriteLogs = arr
+					let fLogs = getApp().globalData.allFavoriteLogs
+					console.log(getApp().globalData.allFavoriteLogs)
+					
+					let farr = []
+					for (let i = 0; i < data.length; i++) {
+						data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
+						data[i]["isLiked"] = false
+						data[i]["isUnliked"] = false
+						fLogs.forEach(favariteLogs =>{
+							if(favariteLogs.logId == data[i]._id && favariteLogs.like_type == 2){
+								data[i]["isUnliked"] = true;
+								farr.push(data[i])
+							} 
+							if(favariteLogs.logId == data[i]._id && favariteLogs.like_type == 1){
+								data[i]["isLiked"] = true;
+							}
+						})
+					}
+					getApp().globalData.favoriteLogs = farr
+					console.log(getApp().globalData.favoriteLogs)
+					getApp().globalData.logs = data
+					console.log(getApp().globalData.logs)
+					var data1 = data.filter(item => item.public == true);
+					that.setData({
+						list: data1,
+					})
+					getApp().globalData.publiclogs = data1
+				},
+				fail: function(e) {
+					console.log(e)
+				}
 			})
-			getApp().globalData.publiclogs = data1
+			
+			// 我的收藏
+			// let fLogs = getApp().globalData.allFavoriteLogs
+			// console.log(getApp().globalData.allFavoriteLogs)
+			
+			// let farr = []
+			// for (let i = 0; i < data.length; i++) {
+			// 	data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
+			// 	data[i]["isLiked"] = false
+			// 	data[i]["isUnLiked"] = false
+			// 	fLogs.forEach(favariteLogs =>{
+			// 		if(favariteLogs.logId == data[i]._id && favariteLogs.like_type == 2){
+			// 			data[i]["isUnLiked"] = true;
+			// 			farr.push(data[i])
+			// 		} 
+			// 		if(favariteLogs.logId == data[i]._id && favariteLogs.like_type == 1){
+			// 			data[i]["isLiked"] = true;
+			// 		}
+			// 	})
+			// }
+			// getApp().globalData.favoriteLogs = farr
+			// console.log(getApp().globalData.favoriteLogs)
+			// getApp().globalData.logs = data
+			// console.log(getApp().globalData.logs)
+			// var data1 = data.filter(item => item.public == true);
+			// this.setData({
+			// 	list: data1,
+			// })
+			// getApp().globalData.publiclogs = data1
 		}).catch(err => {
 			console.log('请求云函数失败', err);
 		})
-		
+
 		//console.log({list});
 		// wx.getStorage({
 		//   key: '2021/05/26 11:29:37',
@@ -138,11 +200,11 @@ Page({
 			}
 		})
 	},
-	handleDetail(e){
+	handleDetail(e) {
 		let item = e.currentTarget.dataset.id
 		console.log(item)
 		wx.navigateTo({
-			url:'/pages/logDetail/logDetail?id='+item,
+			url: '/pages/logDetail/logDetail?id=' + item,
 		})
 	},
 	handleLike(e) {
@@ -151,39 +213,86 @@ Page({
 		let item = e.currentTarget.dataset.item
 		let index = e.currentTarget.dataset.index
 		let isliked = e.detail.isLiked
+
 		const db = wx.cloud.database()
 		const _ = db.command
-		db.collection('logs').where({
-			_id: item._id
-		}).get({
-			success(res) {
-				console.log(res)
-				//写入数据库
-				let like = res.data[0].like
-				if (isliked == false) {
-					like = like - 1
-				} else {
-					like = like + 1
+		if (isliked == true) {
+			db.collection('favorites').add({
+				data: {
+					userId: getApp().globalData.userInfo.userId,
+					log_user_id: item.userId,
+					logId: item._id,
+					like_type: 1
+				},
+				success: function(res) {
+					console.log(res)
+					// // 成功添加之后将数据添加进我的收藏全局变量中
+					// let arr = getApp().globalData.favoriteLogs
+					// item.isLiked = true;
+					// arr.push(item)
+					// getApp().globalData.favoriteLogs = arr
+					let like = that.data.list[index].like + 1
+					console.log(like)
+					// 需更新logs集合中的收藏信息并展示到页面
+					db.collection('logs').doc(item._id).update({
+						data: {
+							like: like
+						},
+						success: function(res) {
+							console.log(res)
+							let changeList = that.data.list
+							changeList[index].like = that.data.list[index].like + 1
+							changeList[index].isLiked = true;
+							that.setData({
+								list: changeList
+							})
+							console.log(that.data.list[index].like)
+						}
+					})
+				},
+				fail: function(e) {
+					console.log('新增点赞失败')
 				}
-				db.collection('logs').doc(res.data[0]._id).update({
-					data: {
-						like: like
-					},
-					success: function(res) {
-						console.log(res)
-						let changeList = that.data.list
-						changeList[index].like = like
-						that.setData({
-							list: changeList
-						})
-						console.log("我喜欢的数 " + that.data.list[index].like)
-					},
-					fail: function(e) {
-						console.log('更新日志喜欢数失败')
-					}
-				})
-			}
-		})
+			})
+		} else {
+			db.collection('favorites').where({
+				userId: getApp().globalData.userInfo.userId,
+				logId: item._id
+			}).get({
+				success(res) {
+					let like = that.data.list[index].like - 1
+					db.collection('logs').doc(item._id).update({
+						data: {
+							like: like
+						},
+						success: function(res) {
+							console.log(res)
+							let changeList = that.data.list
+							changeList[index].like = that.data.list[index].like - 1
+							changeList[index].isLiked = false;
+							that.setData({
+								list: changeList
+							})
+							db.collection('favorites').doc(res.data[0]._id).remove({
+								success: function(res) {
+									console.log(res)
+									let arr = getApp().globalData.favoriteLogs
+									getApp().globalData.favoriteLogs = arr
+										.filter(item => item
+											._id != item._id)
+									console.log(this.data)
+									// 需减少1 logs集合中收藏信息
+								},
+								fail: function(e) {
+									console.log('删除点赞失败')
+								}
+							})
+						}
+					})
+				}
+			})
+
+		}
 	},
 
 	// 本质上是收藏事件
@@ -200,14 +309,17 @@ Page({
 				data: {
 					userId: getApp().globalData.userInfo.userId,
 					log_user_id: item.userId,
-					logId: item._id
+					logId: item._id,
+					like_type: 2
 				},
 				success: function(res) {
 					console.log(res)
 					// 成功添加之后将数据添加进我的收藏全局变量中
 					let arr = getApp().globalData.favoriteLogs
+					item.isUnliked = true;
 					arr.push(item)
 					getApp().globalData.favoriteLogs = arr
+					console.log(getApp().globalData.favoriteLogs)
 					let unlike = that.data.list[index].unlike + 1
 					console.log(unlike)
 					// 需更新logs集合中的收藏信息并展示到页面
@@ -217,9 +329,9 @@ Page({
 						},
 						success: function(res) {
 							console.log(res)
-							let changeList = this.data.list
-							changeList[index].unlike = this.data.list[index].unlike + 1
-							this.setData({
+							let changeList = that.data.list
+							changeList[index].isUnliked = true;
+							that.setData({
 								list: changeList
 							})
 						}
@@ -242,7 +354,7 @@ Page({
 							getApp().globalData.favoriteLogs = arr.filter(item => item
 								._id != item._id)
 							// 需减少1 logs集合中收藏信息
-							let unlike = this.data.list[index].unlike - 1
+							let unlike = that.data.list[index].unlike - 1
 							// 需更新logs集合中的收藏信息并展示到页面
 							db.collection('logs').doc(item._id).update({
 								data: {
@@ -250,9 +362,9 @@ Page({
 								},
 								success: function(res) {
 									console.log(res)
-									let changeList = this.data.list
-									changeList[index].unlike = this.data.list[index].unlike + 1
-									this.setData({
+									let changeList = that.data.list
+									changeList[index].isUnliked = false;
+									that.setData({
 										list: changeList
 									})
 								}
@@ -274,22 +386,33 @@ Page({
 		const db = wx.cloud.database()
 		const _ = db.command
 		//查找数据库
-		db.collection('favorites').get({
-			data: {
-				userId: userId
-			},
+		db.collection('favorites').where({
+			userId: userId
+		}).get({
 			success(res) {
+				console.log("我收藏的")
 				console.log(res)
-				let arr = []
-				for (let i = 0; i < res.data.length; i++) {
-					db.collection('logs').where({
-						_id: res.data[i].logId
-					}).get({
-						success(res) {
-							arr.push(res.data[0])
-						}
-					})
-				}
+				getApp().globalData.allFavoriteLogs = res.data
+				// getApp().globalData.favoriteLogs = arr
+			},
+			fail: function(e) {
+				console.log(e)
+			}
+		})
+	},
+
+	setFlagToLikeAndUnLike() {
+		// logs 
+		// unlikelogs favoriteLogs
+		const db = wx.cloud.database()
+		const _ = db.command
+		//查找数据库
+		db.collection('favorites').where({
+			userId: userId
+		}).get({
+			success(res) {
+				console.log("我收藏的")
+				console.log(res)
 				getApp().globalData.favoriteLogs = arr
 			},
 			fail: function(e) {

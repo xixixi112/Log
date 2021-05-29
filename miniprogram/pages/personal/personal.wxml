@@ -72,7 +72,7 @@
 					bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 					<view wx:for="{{publicLogs}}" class="logDetail" bindtap="getLogDetail">
 						<title-card img='{{item.image}}' title='{{item.title}}' context='{{item.abstract}}'
-							isShowBtns='{{true}}' isLiked='{{false}}' likeNumber='{{item.like}}' isShowLike='{{true}}'
+							isShowBtns='{{true}}' isLiked='{{item.isLiked}}' likeNumber='{{item.like}}' isShowLike='{{true}}'
 							bind:like='handleLike'>
 						</title-card>
 					</view>
@@ -83,7 +83,7 @@
 					bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 					<view wx:for="{{privateLogs}}" class="logDetail" bindtap="getLogDetail">
 						<title-card img='{{item.image}}' title='{{item.title}}' context='{{item.abstract}}'
-							isShowBtns='{{true}}' isLiked='{{false}}' likeNumber='{{item.like}}' isShowLike='{{true}}'
+							isShowBtns='{{true}}' isLiked='{{item.isLiked}}' likeNumber='{{item.like}}' isShowLike='{{true}}'
 							bind:like='handleLike'>
 						</title-card>
 					</view>
@@ -94,7 +94,7 @@
 					bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
 					<view wx:for="{{favoriteLogs}}" class="logDetail" bindtap="getLogDetail">
 						<title-card img='{{item.image}}' title='{{item.title}}' context='{{item.abstract}}'
-							isShowBtns='{{true}}' isLiked='{{false}}' likeNumber='{{item.like}}' isShowLike='{{true}}'
+							isShowBtns='{{true}}' isLiked='{{item.isLiked}}' likeNumber='{{item.like}}' isShowLike='{{true}}'
 							bind:like='handleLike'>
 						</title-card>
 					</view>

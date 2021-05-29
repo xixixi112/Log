@@ -48,14 +48,12 @@ Page({
 		this.userInfo = getApp().globalData.userInfo
 		this.username = userInfo.username
 		this.signature = userInfo.signature
-		console.log(this.username);
 
 		if (this.username) {
 			var data = getApp().globalData.logs.filter(item => item.userId == userInfo.userId);
 			for (let i = 0; i < data.length; i++) {
 				data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
 			}
-			//console.log(data);
 			var data1 = data.filter(item => item.public == true);
 			var data2 = data.filter(item => item.public == false);
 			this.setData({
@@ -232,21 +230,7 @@ Page({
 		console.log(this.privateLogs)
 	},
 
-	// getMyFavoritesLogs() {
-	// 	favoriteLogs
-	// 	const db = wx.cloud.database()
-	// 	const _ = db.command
-	// 	//查找数据库
-	// 	db.collection('favorites').where({
-	// 		userId: this.userId
-	// 	}).get({
-	// 		success(res) {
-	// 			console.log(res)
-	// 			getApp().globalData.favoriteLogs = res.data
-	// 		}
-	// 	})
 
-	// },
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
@@ -263,6 +247,9 @@ Page({
 		this.userId = this.userInfo.userId
 		this.getPublicLogs()
 		this.getPrivateLogs()
+		this.setData({
+			favoriteLogs: getApp().globalData.favoriteLogs
+		})
 	},
 
 	/**
