@@ -24,7 +24,7 @@ Page({
 		this.username = userInfo.username
 		if (this.username) {
 			getApp().globalData.userInfo = userInfo
-			this.getMyFavoritesLogs(userInfo._openid)
+			// this.getMyFavoritesLogs(userInfo.userInfo)
 		}
 		     
 		wx.getSetting({
@@ -45,14 +45,11 @@ Page({
 	},     
 	
 	login(e) {
-		if (this.username == '' || this.username == null) {
-			this.getUserInfoHandler(e)
-		} else {
-			this.toIndex()
-		}
+		this.getUserInfoHandler(e)
 	},
 	
 	getUserInfoHandler: function(e) {
+		let that = this;
 		let d = e.detail.userInfo
 		getApp().globalData.userInfo = d
 		this.setData({
@@ -62,7 +59,6 @@ Page({
 			gender: d.gender
 			// signature: d.signature
 		})
-		wx.setStorageSync('userInfo', d)
 		//获取数据库引用
 		const db = wx.cloud.database()
 		const _ = db.command
@@ -80,6 +76,8 @@ Page({
 				//如果查询到数据,将数据记录，否则去数据库注册
 				if (res.data && res.data.length > 0) {
 					wx.setStorageSync('openId', res.data[0]._openid)
+					wx.setStorageSync('userInfo', res.data[0])
+					that.toIndex()
 				} else {
 					//定时器
 					setTimeout(() => {
@@ -101,6 +99,7 @@ Page({
 										console.log("数据库新增返回: " + JSON.stringify(res))
 										wx.setStorageSync('openId', res.data[0]._openid)
 										wx.setStorageSync('userInfo', res.data[0])
+										that.toIndex()
 									},
 									fail: err => {
 										console.log('用户_openId设置失败')
@@ -118,12 +117,6 @@ Page({
 	
 			}
 		})
-		this.username = getApp().globalData.userInfo.username
-		if (this.username != '' || this.username != null) {
-			wx.switchTab({
-				url: "/pages/index/index",
-			})
-		}
 	},
 	
 	getUserId: function() {

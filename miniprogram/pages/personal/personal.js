@@ -262,7 +262,7 @@ Page({
 	// 		}
 	// 	})
 
-	// },
+
 
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
@@ -284,6 +284,9 @@ Page({
 		this.userId = this.userInfo.userId
 		this.getPublicLogs()
 		this.getPrivateLogs()
+		this.setData({
+			favoriteLogs: getApp().globalData.favoriteLogs
+		})
 	},
 
 	/**

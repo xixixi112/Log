@@ -20,10 +20,10 @@
     tag='标签一' 
     tagColor='blue'
     isShowLike="{{true}}"
-    isLiked="{{false}}"
+    isLiked="{{item.isLiked}}"
     likeNumber='{{item.like}}'
     isShowUnlike="{{true}}"
-    isUnLiked="{{false}}"
+    isUnliked="{{item.isUnliked}}"
 	data-item="{{item}}" 
 	data-index = "{{index}}"
     unlikeNumber='{{10}}'
