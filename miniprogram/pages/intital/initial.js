@@ -24,7 +24,7 @@ Page({
 		this.username = userInfo.username
 		if (this.username) {
 			getApp().globalData.userInfo = userInfo
-			// this.getMyFavoritesLogs(userInfo.userId)
+			// this.getMyFavoritesLogs(userInfo.userInfo)
 		}
 		     
 		wx.getSetting({
@@ -45,18 +45,13 @@ Page({
 	},     
 	
 	login(e) {
-		// if (this.username == '' || this.username == null) {
-		// 	this.getUserInfoHandler(e)
-		// } else {
-		// 	this.toIndex()
-		// }
 		this.getUserInfoHandler(e)
 	},
 	
 	getUserInfoHandler: function(e) {
+		let that = this;
 		let d = e.detail.userInfo
 		getApp().globalData.userInfo = d
-		let that = this;
 		this.setData({
 			avatar: d.avatarUrl,
 			username: d.nickName,
@@ -64,7 +59,6 @@ Page({
 			gender: d.gender
 			// signature: d.signature
 		})
-		// wx.setStorageSync('userInfo', d)
 		//获取数据库引用
 		const db = wx.cloud.database()
 		const _ = db.command
@@ -80,7 +74,6 @@ Page({
 			success(res) {
 				// res.data 是包含以上定义的记录的数组
 				//如果查询到数据,将数据记录，否则去数据库注册
-				console.log(res.data[0])
 				if (res.data && res.data.length > 0) {
 					wx.setStorageSync('openId', res.data[0]._openid)
 					wx.setStorageSync('userInfo', res.data[0])
