@@ -28,6 +28,7 @@ Page({
 	onLoad: function(options) {
 		getApp().globalData.userInfo = wx.getStorageSync("userInfo")
 		let userInfo = getApp().globalData.userInfo
+		console.log(userInfo.userId)
 		this.getMyFavoritesLogs(userInfo.userId)
 		wx.cloud.callFunction({
 			name: 'getPublicLogs',
@@ -274,6 +275,9 @@ Page({
 		const _ = db.command
 		//查找数据库
 		db.collection('favorites').get({
+			data: {
+				userId: userId
+			},
 			success(res) {
 				console.log(res)
 				let arr = []
@@ -289,7 +293,7 @@ Page({
 				getApp().globalData.favoriteLogs = arr
 			},
 			fail: function(e) {
-				console.log('查找收藏失败')
+				console.log(e)
 			}
 		})
 	},
