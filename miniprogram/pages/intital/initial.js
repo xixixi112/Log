@@ -66,6 +66,7 @@ Page({
 		var userId = wx.getStorageSync('userId')
 		if (!userId) {
 			userId = this.getUserId()
+			console.log(userId)
 		}
 		//查找数据库
 		db.collection('users').where({

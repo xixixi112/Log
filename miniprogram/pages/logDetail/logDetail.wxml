@@ -9,7 +9,9 @@
 <template is="wxParse" data="{{wxParseData:article.nodes}}"/>
 </view> -->
 <!-- </view> --> 
-<view class="page" data-weui-theme="{{theme}}">
+<view class="page">
+  <scroll-view class="scroll" scroll-y="true"  bindscrolltoupper="upper" bindscrolltolower="lower"
+					bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
     <view class="hd">
         <view class="title">{{log.title}}</view>
         <view class="time">
@@ -57,5 +59,6 @@
      
     </view>
   </view>
+ </scroll-view>
 </view>
 

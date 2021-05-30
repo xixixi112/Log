@@ -47,6 +47,7 @@ Page({
 		let userInfo = wx.getStorageSync("userInfo");
 		this.userInfo = userInfo
 		this.username = userInfo.username
+		console.log(this.username)
 		// this.signature = userInfo.signature
 		if (this.username) {
 			this.userInfo = getApp().globalData.userInfo

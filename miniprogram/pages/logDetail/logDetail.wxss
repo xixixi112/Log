@@ -1,5 +1,13 @@
 /* miniprogram/pages/logDetail/logDetail.wxss */
 @import "../../wxParse/wxParse.wxss";
+
+.page{
+  display: flex;
+}
+.scroll{
+  flex: 1;
+  height: 1px;
+}
 .title{
   margin-top: 3%;
   font-size: 45rpx;
@@ -44,7 +52,7 @@
 .bottom{
   background-color: white;
   margin-top: 3%;
-  min-height: 600rpx;
+  height:auto;
   margin-left: 5%;
   margin-right: 5%;
   border-radius: 20rpx;
@@ -53,6 +61,7 @@
 .context{
   color:darkslategrey;
   margin-top: 3%;
+  height: auto;
   margin-left: 5%;
   margin-right: 5%;
 }
