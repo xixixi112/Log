@@ -371,6 +371,7 @@ Page({
 		} else {
 			var saveArr = getApp().globalData.logs;
 			let userId = getApp().globalData.userInfo.userId
+			let openid = getApp().globalData.userInfo._openid
 			console.log('userId: ' + userId)
 			var curtime = util.formatTime(new Date());
 			let obj = {
@@ -380,6 +381,7 @@ Page({
 				time: curtime,
 				abstract: that.data.abstract,
 				userId: userId,
+				_openid: openid,
 				public: !that.data.checked,
 				like: 0,
 				unlike: 0
@@ -389,13 +391,15 @@ Page({
 			db.collection("logs").add({
 				data: obj,
 				success: function(res) {
-					obj._id = res.data[0]._id
-					saveArr.push(obj);
+					console.log(res)
+					obj._id = res._id
 					obj.isLiked = false
 					obj.isUnliked = false
+					saveArr.push(obj);
 					getApp().globalData.logs = saveArr
-					getApp().globalData.myPrivate = saveArr.filter(item => item.public == false && item.userId == userId)
-					getApp().globalData.myPublic = saveArr.filter(item => item.public == true && item.userId == userId)
+					console.log("全部日志： " + getApp().globalData.logs)
+					getApp().globalData.myPrivate = saveArr.filter(item => item.public == false && item._openid == openid)
+					getApp().globalData.myPublic = saveArr.filter(item => item.public == true && item._openid == openid)
 					wx.showToast({
 						title: '保存成功',
 						icon: 'success',

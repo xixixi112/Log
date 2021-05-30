@@ -40,7 +40,7 @@ Page({
 			const _ = db.command
 			//查找数据库
 			db.collection('favorites').where({
-				userId: userInfo.userId
+				_openid: userInfo._openid
 			}).get({
 				success(res) {
 					console.log("我收藏的")
@@ -315,8 +315,21 @@ Page({
 		}
 	},
 
-	// 本质上是收藏事件
 	handleUnlike(e) {
+		let item = e.currentTarget.dataset.item
+		if (item._openid == getApp().globalData.userInfo._openid) {
+			wx.showToast({
+				title: '是自己的文章,收藏无效哦~',
+				icon: 'none',
+				duration: 1500
+			})
+		} else {
+			this.handleUnlikeEvent(e)
+		}
+	},
+
+	// 本质上是收藏事件
+	handleUnlikeEvent(e) {
 		console.log(e)
 		let that = this
 		let item = e.currentTarget.dataset.item
@@ -363,16 +376,13 @@ Page({
 			})
 		} else {
 			db.collection('favorites').where({
-				userId: getApp().globalData.userInfo.userId,
+				_openid: getApp().globalData.userInfo._openid,
 				logId: item._id
 			}).get({
 				success(res) {
 					db.collection('favorites').doc(res.data[0]._id).remove({
 						success: function(res) {
 							console.log(res)
-							let arr = getApp().globalData.favoriteLogs
-							getApp().globalData.favoriteLogs = arr.filter(item => item
-								._id != item._id)
 							// 需减少1 logs集合中收藏信息
 							let unlike = that.data.list[index].unlike - 1
 							// 需更新logs集合中的收藏信息并展示到页面
@@ -382,6 +392,16 @@ Page({
 								},
 								success: function(res) {
 									console.log(res)
+									console.log(item._id)
+									let logId = item._id
+									let arr = getApp().globalData.favoriteLogs
+									let r = []
+									for (let i = 0; i < arr.length; i++) {
+										if (arr[i]["_id"] != logId) {
+											r.push(arr[i])
+										}
+									}
+									getApp().globalData.favoriteLogs = r
 									let changeList = that.data.list
 									changeList[index].isUnliked = false;
 									that.setData({
@@ -399,46 +419,6 @@ Page({
 
 		}
 
-	},
-
-	getMyFavoritesLogs(userId) {
-		console.log("我爱的： " + userId)
-		const db = wx.cloud.database()
-		const _ = db.command
-		//查找数据库
-		db.collection('favorites').where({
-			userId: userId
-		}).get({
-			success(res) {
-				console.log("我收藏的")
-				console.log(res)
-				getApp().globalData.allFavoriteLogs = res.data
-				// getApp().globalData.favoriteLogs = arr
-			},
-			fail: function(e) {
-				console.log(e)
-			}
-		})
-	},
-
-	setFlagToLikeAndUnLike() {
-		// logs 
-		// unlikelogs favoriteLogs
-		const db = wx.cloud.database()
-		const _ = db.command
-		//查找数据库
-		db.collection('favorites').where({
-			userId: userId
-		}).get({
-			success(res) {
-				console.log("我收藏的")
-				console.log(res)
-				getApp().globalData.favoriteLogs = arr
-			},
-			fail: function(e) {
-				console.log(e)
-			}
-		})
 	},
 
 	/**

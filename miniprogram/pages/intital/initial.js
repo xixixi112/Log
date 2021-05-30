@@ -10,6 +10,7 @@ Page({
 		avatar: 'https://thirdwx.qlogo.cn/mmopen/vi_32/POgEwh4mIHO4nibH0KlMECNjjGxQUq24ZEaGT4poC6icRiccVGKSyXwibcPq4BWmiaIGuG1icwxaQX6grC9VemZoJ8rg/132',
 		signature: '请输入个性签名',
 		gender: 1,
+		openid: ''
 	},
 
 	/**
@@ -20,13 +21,22 @@ Page({
 		// 	title: '个人'
 		// })
 		//当重新加载这个页面时，查看是否有已经登录的信息
+		wx.cloud.callFunction({
+		  name: 'login',
+		  complete: res => {
+			  this.setData({
+				  openid: res.result.userInfo.openId
+			  })
+		    console.log("openid: " + this.data.openid)
+		  }
+		})
 		let userInfo = wx.getStorageSync("userInfo")
 		this.username = userInfo.username
 		if (this.username) {
 			getApp().globalData.userInfo = userInfo
 			// this.getMyFavoritesLogs(userInfo.userInfo)
 		}
-		     
+		 
 		wx.getSetting({
 			success: res => {
 				if (res.authSetting['scope.userInfo']) {
@@ -44,15 +54,12 @@ Page({
 		})
 	},     
 	
-	login(e) {
-		this.getUserInfoHandler(e)
-	},
-	
 	getUserInfoHandler: function(e) {
 		let that = this;
 		let d = e.detail.userInfo
+		console.log(e)
 		// getApp().globalData.userInfo = d
-		this.setData({
+		that.setData({
 			avatar: d.avatarUrl,
 			username: d.nickName,
 			userInfo: d,
@@ -65,11 +72,11 @@ Page({
 		//查看是否已有登录，无，则获取id
 		var userId = wx.getStorageSync('userId')
 		if (!userId) {
-			userId = this.getUserId()
+			userId = that.getUserId()
 		}
 		//查找数据库
 		db.collection('users').where({
-			_openid: d.openid
+			_openid: that.data.openid
 		}).get({
 			success(res) {
 				// res.data 是包含以上定义的记录的数组
