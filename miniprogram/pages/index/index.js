@@ -35,14 +35,7 @@ Page({
 		}).then(res => {
 			console.log('请求云函数成功', res.result.list);
 			var data = res.result.list;
-			data.sort(this.compare('time'));
-			for (let i = 0; i < data.length; i++) {
-				data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
-			}
-			var data1 = data.filter(item => item.public == true);
-			this.setData({
-				list: data1,
-			})
+			data.sort(that.compare('time'));
 			const db = wx.cloud.database()
 			const _ = db.command
 			//查找数据库
@@ -53,11 +46,13 @@ Page({
 					console.log("我收藏的")
 					console.log(res)
 					getApp().globalData.allFavoriteLogs = res.data
-					// getApp().globalData.favoriteLogs = arr
 					let fLogs = getApp().globalData.allFavoriteLogs
-					console.log(getApp().globalData.allFavoriteLogs)
-					
+					var data1 = []
 					let farr = []
+					let myPublicLogs = []
+					let mySecriteLogs = []
+					console.log("ceshi openid " + userInfo._openid)
+					
 					for (let i = 0; i < data.length; i++) {
 						data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
 						data[i]["isLiked"] = false
@@ -71,16 +66,33 @@ Page({
 								data[i]["isLiked"] = true;
 							}
 						})
-					}
+						if (data[i]["public"] === true) {
+							data1.push(data[i])
+							if (data[i]["_openid"] === userInfo._openid) {
+								myPublicLogs.push(data[i])
+							}
+						}
+						if (data[i]["public"] == false && data[i]["_openid"] == userInfo._openid) {
+							mySecriteLogs.push(data[i])
+						}
+					}   
 					getApp().globalData.favoriteLogs = farr
 					console.log(getApp().globalData.favoriteLogs)
 					getApp().globalData.logs = data
 					console.log(getApp().globalData.logs)
-					var data1 = data.filter(item => item.public == true);
+					
 					that.setData({
 						list: data1,
 					})
 					getApp().globalData.publiclogs = data1
+					getApp().globalData.myPrivate = mySecriteLogs
+					
+					console.log("我私密的全局 ")
+					console.log(getApp().globalData.myPrivate)
+					
+					getApp().globalData.myPublic = myPublicLogs
+					console.log("我公开的全局 ")
+					console.log(getApp().globalData.myPublic)
 				},
 				fail: function(e) {
 					console.log(e)
@@ -440,8 +452,10 @@ Page({
 	 * 生命周期函数--监听页面显示
 	 */
 	onShow: function() {
+		let allLogs = getApp().globalData.logs
+		allLogs = allLogs.filter(item => item.public == true);
 		this.setData({
-			list: getApp().globalData.publiclogs
+			list: allLogs
 		})
 	},
 

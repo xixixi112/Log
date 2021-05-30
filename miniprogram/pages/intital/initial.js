@@ -51,7 +51,7 @@ Page({
 	getUserInfoHandler: function(e) {
 		let that = this;
 		let d = e.detail.userInfo
-		getApp().globalData.userInfo = d
+		// getApp().globalData.userInfo = d
 		this.setData({
 			avatar: d.avatarUrl,
 			username: d.nickName,
@@ -77,6 +77,7 @@ Page({
 				if (res.data && res.data.length > 0) {
 					wx.setStorageSync('openId', res.data[0]._openid)
 					wx.setStorageSync('userInfo', res.data[0])
+					getApp().globalData.userInfo = res.data[0] 
 					that.toIndex()
 				} else {
 					//定时器
@@ -99,6 +100,7 @@ Page({
 										console.log("数据库新增返回: " + JSON.stringify(res))
 										wx.setStorageSync('openId', res.data[0]._openid)
 										wx.setStorageSync('userInfo', res.data[0])
+										getApp().globalData.userInfo = res.data[0]
 										that.toIndex()
 									},
 									fail: err => {
@@ -128,29 +130,6 @@ Page({
 		return userId;
 	},
 	
-	getMyFavoritesLogs(userId) {
-		const db = wx.cloud.database()
-		const _ = db.command
-		//查找数据库
-		db.collection('favorites').where({
-			userId: userId
-		}).get({
-			success(res) {
-				console.log(res)
-				let arr = []
-				for (let i = 0; i < res.data.length; i++) {
-					db.collection('logs').where({
-						_id: res.data[i]._id
-					}).get({
-						success(res) {
-							arr.push(res.data[0])
-						}
-					})
-				}
-				getApp().globalData.favoriteLogs = arr
-			}
-		})
-	},
 	
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
@@ -164,13 +143,6 @@ Page({
 			url: "/pages/register/register",
 		})
 	},
-	
-	// login(e) {
-	// 	wx.navigateTo({
-	// 		url: '/pages/login/login',
-	// 	})
-		
-	// },
 	
 	toIndex(e) {
 		wx.switchTab({

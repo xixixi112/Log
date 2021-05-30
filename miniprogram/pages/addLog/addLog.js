@@ -9,14 +9,14 @@ Page({
 		editorHeight: 300,
 		keyboardHeight: 0,
 		isIOS: false,
-		public:true,
+		public: true,
 		maxDate: "",
 		dailyTitle: "",
 		abstract: "",
 		showImgUrl: "点击选择封面",
 		ImgUrl: "",
 		userInfo: getApp().globalData.userInfo,
-		checked:false
+		checked: false
 	},
 	onShow: function() {
 
@@ -232,14 +232,14 @@ Page({
 			}
 		})
 	},
-  radioChange() {
-    this.setData({
-      checked :!this.data.checked
-    })
-    console.log(this.data.checked)
-  },
+	radioChange() {
+		this.setData({
+			checked: !this.data.checked
+		})
+		console.log(this.data.checked)
+	},
 	getImgUrl() {
-    	let that = this;
+		let that = this;
 		wx.chooseImage({
 			count: 1,
 			sizeType: ['original', 'compressed'],
@@ -370,17 +370,20 @@ Page({
 			})
 		} else {
 			var saveArr = getApp().globalData.logs;
-			console.log('userId: ' + getApp().globalData.userInfo.userId)
+			let userId = getApp().globalData.userInfo.userId
+			console.log('userId: ' + userId)
 			var curtime = util.formatTime(new Date());
-		  let obj = {
-			image: that.data.ImgUrl,
-			detail: app.globalData.data.richTextContents,
-			title: that.data.dailyTitle,
-			time: curtime,
-			abstract: that.data.abstract,
-			userId: getApp().globalData.userInfo.userId,
-			public: !that.data.checked
-		  }
+			let obj = {
+				image: that.data.ImgUrl,
+				detail: app.globalData.data.richTextContents,
+				title: that.data.dailyTitle,
+				time: curtime,
+				abstract: that.data.abstract,
+				userId: userId,
+				public: !that.data.checked,
+				like: 0,
+				unlike: 0
+			}
 			//把图片存到users集合表
 			const db = wx.cloud.database();
 			db.collection("logs").add({
@@ -388,7 +391,11 @@ Page({
 				success: function(res) {
 					obj._id = res.data[0]._id
 					saveArr.push(obj);
+					obj.isLiked = false
+					obj.isUnliked = false
 					getApp().globalData.logs = saveArr
+					getApp().globalData.myPrivate = saveArr.filter(item => item.public == false && item.userId == userId)
+					getApp().globalData.myPublic = saveArr.filter(item => item.public == true && item.userId == userId)
 					wx.showToast({
 						title: '保存成功',
 						icon: 'success',

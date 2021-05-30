@@ -45,51 +45,61 @@ Page({
 		})
 		//当重新加载这个页面时，查看是否有已经登录的信息
 		let userInfo = wx.getStorageSync("userInfo");
-		this.userInfo = getApp().globalData.userInfo
+		this.userInfo = userInfo
 		this.username = userInfo.username
-		this.signature = userInfo.signature
-		var user=""
+		// this.signature = userInfo.signature
 		if (this.username) {
-			wx.cloud.callFunction({
-				name: 'getUser',
-				data:{
-					userId:userInfo.userId
-				}
-			}).then(res => {
-				console.log('请求云函数成功', res.result.data);
-				user = res.result.data
-			}).catch(err => {
-				console.log('请求云函数失败', err);
+			this.userInfo = getApp().globalData.userInfo
+			this.setData({
+				username: userInfo.username,
+				avatar: userInfo.avatar,
+				signature:userInfo.signature,
+				gender: userInfo.gender,
+				userId: userInfo.userId,
+				publicLogs: getApp().globalData.myPublic,
+				privateLogs: getApp().globalData.myPrivate,
+				favoriteLogs: getApp().globalData.favoriteLogs
 			})
-			wx.cloud.callFunction({
-				name: 'getLog',
-			}).then(res => {
-				console.log('请求云函数成功', res.result.data);
-				var data = res.result.data;
-				// data.sort(this.compare('time'));
-				for (let i = 0; i < data.length; i++) {
-					data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
-				}
-				var data = data.filter(item => item.userId == userInfo.userId);
-				getApp().globalData.logs = data
-				var data1 = data.filter(item => item.public == true);
-				getApp().globalData.myPublic = data1
-				var data2 = data.filter(item => item.public == false);
-				getApp().globalData.myPrivate = data2
+			// wx.cloud.callFunction({
+			// 	name: 'getUser',
+			// 	data:{
+			// 		userId:userInfo.userId
+			// 	}
+			// }).then(res => {
+			// 	console.log('请求云函数成功', res.result.data);
+			// 	user = res.result.data
+			// }).catch(err => {
+			// 	console.log('请求云函数失败', err);
+			// })
+			// wx.cloud.callFunction({
+			// 	name: 'getLog',
+			// }).then(res => {
+			// 	console.log('请求云函数成功', res.result.data);
+			// 	var data = res.result.data;
+			// 	// data.sort(this.compare('time'));
+			// 	for (let i = 0; i < data.length; i++) {
+			// 		data[i]["time"] = util.formatTime(new Date(data[i]["time"]))
+			// 	}
+			// 	var data = data.filter(item => item.userId == userInfo.userId);
+			// 	getApp().globalData.logs = data
+			// 	var data1 = data.filter(item => item.public == true);
+			// 	getApp().globalData.myPublic = data1
+			// 	var data2 = data.filter(item => item.public == false);
+			// 	getApp().globalData.myPrivate = data2
 				
-				this.setData({
-					username: userInfo.username,
-					avatar: userInfo.avatar,
-					signature:user[0].signature,
-					gender: userInfo.gender,
-					userId: userInfo.userId,
-					publicLogs: data1,
-					privateLogs: data2,
-					favoriteLogs: getApp().globalData.favoriteLogs
-				})
-			}).catch(err => {
-				console.log('请求云函数失败', err);
-			})
+			// 	this.setData({
+			// 		username: userInfo.username,
+			// 		avatar: userInfo.avatar,
+			// 		signature:userInfo.signature,
+			// 		gender: userInfo.gender,
+			// 		userId: userInfo.userId,
+			// 		publicLogs: data1,
+			// 		privateLogs: data2,
+			// 		favoriteLogs: getApp().globalData.favoriteLogs
+			// 	})
+			// }).catch(err => {
+			// 	console.log('请求云函数失败', err);
+			// })
 
 			
 		}
@@ -282,9 +292,11 @@ Page({
 		// })
 		this.userInfo = getApp().globalData.userInfo
 		this.userId = this.userInfo.userId
-		this.getPublicLogs()
-		this.getPrivateLogs()
+		// this.getPublicLogs()
+		// this.getPrivateLogs()
 		this.setData({
+			publicLogs: getApp().globalData.myPublic,
+			privateLogs: getApp().globalData.myPrivate,
 			favoriteLogs: getApp().globalData.favoriteLogs
 		})
 	},
