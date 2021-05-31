@@ -1,7 +1,6 @@
 /* miniprogram/pages/logDetail/logDetail.wxss */
 @import "../../wxParse/wxParse.wxss";
-
-.page{
+ .page{
   display: flex;
 }
 .scroll{
@@ -52,18 +51,20 @@
 .bottom{
   background-color: white;
   margin-top: 3%;
-  height:auto;
+  min-height: 700rpx;
   margin-left: 5%;
   margin-right: 5%;
   border-radius: 20rpx;
+  color:darkslategrey;
 }
 
 .context{
-  color:darkslategrey;
+ 
   margin-top: 3%;
-  height: auto;
+ 
   margin-left: 5%;
   margin-right: 5%;
+  
 }
 
 .divLine{

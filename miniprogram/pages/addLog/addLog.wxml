@@ -53,7 +53,7 @@
 
 <!-- 输入文本区域 -->
 <scroll-view scroll-y="true" style="height: 520rpx;" bindscrolltoupper="upper" bindscrolltolower="lower"
-	bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+	bindscroll="scroll" >
 	<!-- <view class="container" style="height:{{editorHeight}}px;"></view> -->
 	<!-- <editor id="editor" class="ql-container" placeholder="{{placeholder}}" bindstatuschange="onStatusChange" bindready="onEditorReady" show-img-size="true"> -->
 	<view>

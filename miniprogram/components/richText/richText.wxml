@@ -6,7 +6,7 @@
       </editor>
     </view>
   </view>
-  <view class="editor-toolbar" bindtap="format">
+  <view class="editor-toolbar" bindtap="format" >
     <view class="toolbar-2">
       <view class="tool-item-cell">
         <view class="tool-item-box">

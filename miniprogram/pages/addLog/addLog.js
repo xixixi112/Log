@@ -363,70 +363,77 @@ Page({
 		var that = this;
 		console.log(that.data);
 		if (that.data.dailyTitle === "" || that.data.abstract === "" || that.data.ImgUrl === "") {
-			wx.showToast({
-				title: '请填写必要信息',
-				icon: 'error',
-				duration: 1500
-			})
+		 wx.showToast({
+			title: '请填写必要信息',
+			icon: 'error',
+			duration: 1500
+		 })
 		} else {
-			var saveArr = getApp().globalData.logs;
-			let userId = getApp().globalData.userInfo.userId
-			console.log('userId: ' + userId)
-			var curtime = util.formatTime(new Date());
-			let obj = {
-				image: that.data.ImgUrl,
-				detail: app.globalData.data.richTextContents,
-				title: that.data.dailyTitle,
-				time: curtime,
-				abstract: that.data.abstract,
-				userId: userId,
-				public: !that.data.checked,
-				like: 0,
-				unlike: 0
+		 var saveArr = getApp().globalData.logs;
+		 let userInfo = getApp().globalData.userInfo
+		 let userId = userInfo.userId
+		 let openid = userInfo._openid
+		 console.log('userId: ' + userId)
+		 var curtime = util.formatTime(new Date());
+		 let obj = {
+			image: that.data.ImgUrl,
+			detail: app.globalData.data.richTextContents,
+			title: that.data.dailyTitle,
+			time: curtime,
+			abstract: that.data.abstract,
+			userId: userId,
+			_openid: openid,
+			public: !that.data.checked,
+			like: 0,
+			unlike: 0
+		 }
+		 //把图片存到users集合表
+		 const db = wx.cloud.database();
+		 db.collection("logs").add({
+			data: obj,
+			success: function(res) {
+			 console.log(res)
+			 obj._id = res._id
+			 obj.isLiked = false
+			 obj.isUnliked = false
+			 obj.avatar = userInfo.avatar
+			 obj.username = userInfo.username
+			 saveArr.push(obj);
+			 getApp().globalData.logs = saveArr
+			 console.log("全部日志： " + getApp().globalData.logs)
+			 getApp().globalData.myPrivate = saveArr.filter(item => item.public == false && item._openid == openid)
+			 getApp().globalData.myPublic = saveArr.filter(item => item.public == true && item._openid == openid)
+			 wx.showToast({
+				title: '保存成功',
+				icon: 'success',
+				duration: 1500
+			 })
+			},
+			fail: function() {
+			 wx.showToast({
+				title: '保存失败',
+				'icon': 'none',
+				duration: 3000
+			 })
 			}
-			//把图片存到users集合表
-			const db = wx.cloud.database();
-			db.collection("logs").add({
-				data: obj,
-				success: function(res) {
-					obj._id = res.data[0]._id
-					saveArr.push(obj);
-					obj.isLiked = false
-					obj.isUnliked = false
-					getApp().globalData.logs = saveArr
-					getApp().globalData.myPrivate = saveArr.filter(item => item.public == false && item.userId == userId)
-					getApp().globalData.myPublic = saveArr.filter(item => item.public == true && item.userId == userId)
-					wx.showToast({
-						title: '保存成功',
-						icon: 'success',
-						duration: 1500
-					})
-				},
-				fail: function() {
-					wx.showToast({
-						title: '保存失败',
-						'icon': 'none',
-						duration: 3000
-					})
-				}
-			});
-			setTimeout(function() {
-				wx.switchTab({
-					url: "../index/index",
-					success: (result) => {
-						console.log("switchTab success")
-					},
-					fail: (res) => {
-						console.log(res)
-					},
-					complete: (res) => {
-						console.log("complete")
-					},
-				})
-			}, 1800)
-			console.log("getContents success");
+		 });
+		 setTimeout(function() {
+			wx.switchTab({
+			 url: "../index/index",
+			 success: (result) => {
+				console.log("switchTab success")
+			 },
+			 fail: (res) => {
+				console.log(res)
+			 },
+			 complete: (res) => {
+				console.log("complete")
+			 },
+			})
+		 }, 1800)
+		 console.log("getContents success");
 		}
-	},
+	 },
 
 
 	removeFormat() {
