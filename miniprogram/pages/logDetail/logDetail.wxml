@@ -28,7 +28,8 @@
     <divider text="文章正文"> </divider>
     <view class="bottom">
          <!-- {{log.detail}} -->
-         <editor id="editor" class=" context" read-only bindready="onEditorReady"></editor>
+         <view class="context">
+         <editor id="editor" class=" editor" read-only bindready="onEditorReady"></editor>
             <!-- <view class="weui-article__h1">大标题</view>
             <view class="weui-article__section">
                 <view class="weui-article__h2">章标题</view>
@@ -56,8 +57,9 @@
                 </view>
             </view> -->
      
- 
+          </view>   
   </view>
  </scroll-view>
+
 </view>
 
