@@ -86,15 +86,37 @@ Page({
 
 	//插入图片
 	insertImageEvent() {
+		let path = ""
 		wx.chooseImage({
 			count: 1,
 			success: res => {
-				let path = res.tempFilePaths[0];
-				//调用子组件方法，图片应先上传再插入，不然预览时无法查看图片。
-				richText.insertImageMethod(path).then(res => {
-					console.log('[insert image success callback]=>', res)
-				}).catch(res => {
-					console.log('[insert image fail callback]=>', res)
+				console.log(res.tempFilePaths)
+				let filePath = res.tempFilePaths[0];
+				const name = Math.random() * 1000000;
+				const cloudPath = name + filePath.match(/\.[^.]+?$/)[0]
+				wx.cloud.uploadFile({
+					cloudPath, //云存储图片名字
+					filePath, //临时路径
+					success: res => {
+						console.log(res)
+						// that.setData({
+						// 	logImage: res.fileID, //云存储图片路径,可以把这个路径存到集合，要用的时候再取出来
+						// });
+						path = res.fileID
+						//调用子组件方法，图片应先上传再插入，不然预览时无法查看图片。
+						richText.insertImageMethod(path).then(res => {
+							console.log('[insert image success callback]=>',
+								res)
+						}).catch(res => {
+							console.log('[insert image fail callback]=>', res)
+						});
+					},
+					fail: e => {
+						console.error('[上传图片] 失败：', e)
+					},
+					complete: () => {
+						wx.hideLoading()
+					}
 				});
 			}
 		})
@@ -363,77 +385,79 @@ Page({
 		var that = this;
 		console.log(that.data);
 		if (that.data.dailyTitle === "" || that.data.abstract === "" || that.data.ImgUrl === "") {
-		 wx.showToast({
-			title: '请填写必要信息',
-			icon: 'error',
-			duration: 1500
-		 })
-		} else {
-		 var saveArr = getApp().globalData.logs;
-		 let userInfo = getApp().globalData.userInfo
-		 let userId = userInfo.userId
-		 let openid = userInfo._openid
-		 console.log('userId: ' + userId)
-		 var curtime = util.formatTime(new Date());
-		 let obj = {
-			image: that.data.ImgUrl,
-			detail: app.globalData.data.richTextContents,
-			title: that.data.dailyTitle,
-			time: curtime,
-			abstract: that.data.abstract,
-			userId: userId,
-			_openid: openid,
-			public: !that.data.checked,
-			like: 0,
-			unlike: 0
-		 }
-		 //把图片存到users集合表
-		 const db = wx.cloud.database();
-		 db.collection("logs").add({
-			data: obj,
-			success: function(res) {
-			 console.log(res)
-			 obj._id = res._id
-			 obj.isLiked = false
-			 obj.isUnliked = false
-			 obj.avatar = userInfo.avatar
-			 obj.username = userInfo.username
-			 saveArr.push(obj);
-			 getApp().globalData.logs = saveArr
-			 console.log("全部日志： " + getApp().globalData.logs)
-			 getApp().globalData.myPrivate = saveArr.filter(item => item.public == false && item._openid == openid)
-			 getApp().globalData.myPublic = saveArr.filter(item => item.public == true && item._openid == openid)
-			 wx.showToast({
-				title: '保存成功',
-				icon: 'success',
+			wx.showToast({
+				title: '请填写必要信息',
+				icon: 'error',
 				duration: 1500
-			 })
-			},
-			fail: function() {
-			 wx.showToast({
-				title: '保存失败',
-				'icon': 'none',
-				duration: 3000
-			 })
-			}
-		 });
-		 setTimeout(function() {
-			wx.switchTab({
-			 url: "../index/index",
-			 success: (result) => {
-				console.log("switchTab success")
-			 },
-			 fail: (res) => {
-				console.log(res)
-			 },
-			 complete: (res) => {
-				console.log("complete")
-			 },
 			})
-		 }, 1800)
-		 console.log("getContents success");
+		} else {
+			var saveArr = getApp().globalData.logs;
+			let userInfo = getApp().globalData.userInfo
+			let userId = userInfo.userId
+			let openid = userInfo._openid
+			console.log('userId: ' + userId)
+			var curtime = util.formatTime(new Date());
+			let obj = {
+				image: that.data.ImgUrl,
+				detail: app.globalData.data.richTextContents,
+				title: that.data.dailyTitle,
+				time: curtime,
+				abstract: that.data.abstract,
+				userId: userId,
+				_openid: openid,
+				public: !that.data.checked,
+				like: 0,
+				unlike: 0
+			}
+			//把图片存到users集合表
+			const db = wx.cloud.database();
+			db.collection("logs").add({
+				data: obj,
+				success: function(res) {
+					console.log(res)
+					obj._id = res._id
+					obj.isLiked = false
+					obj.isUnliked = false
+					obj.avatar = userInfo.avatar
+					obj.username = userInfo.username
+					saveArr.push(obj);
+					getApp().globalData.logs = saveArr
+					console.log("全部日志： " + getApp().globalData.logs)
+					getApp().globalData.myPrivate = saveArr.filter(item => item.public == false &&
+						item._openid == openid)
+					getApp().globalData.myPublic = saveArr.filter(item => item.public == true &&
+						item._openid == openid)
+					wx.showToast({
+						title: '保存成功',
+						icon: 'success',
+						duration: 1500
+					})
+				},
+				fail: function() {
+					wx.showToast({
+						title: '保存失败',
+						'icon': 'none',
+						duration: 3000
+					})
+				}
+			});
+			setTimeout(function() {
+				wx.switchTab({
+					url: "../index/index",
+					success: (result) => {
+						console.log("switchTab success")
+					},
+					fail: (res) => {
+						console.log(res)
+					},
+					complete: (res) => {
+						console.log("complete")
+					},
+				})
+			}, 1800)
+			console.log("getContents success");
 		}
-	 },
+	},
 
 
 	removeFormat() {
